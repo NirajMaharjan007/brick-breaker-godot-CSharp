@@ -46,10 +46,6 @@ public partial class Paddle : StaticBody2D
         // Clamp to camera limits
         float clampedX = Mathf.Clamp(pos.X, left, right);
 
-        var str =
-            $"camera limitd left and right {left} and {right} respectively\n Paddle->{GlobalPosition}";
-        GD.Print(str);
-
         GlobalPosition = new Vector2(clampedX, pos.Y);
     }
 }

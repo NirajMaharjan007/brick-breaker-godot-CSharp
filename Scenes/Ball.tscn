@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnwbvcj75m6jc"]
+[gd_scene load_steps=4 format=3 uid="uid://dnwbvcj75m6jc"]
 
 [ext_resource type="Texture2D" uid="uid://b0uncwqd3ruhw" path="res://Assests/break assets/misc/red_ball.png" id="1_7nh6h"]
+[ext_resource type="Script" uid="uid://dae0ewljixxyp" path="res://Scripts/Ball.cs" id="1_eb1ap"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eb1ap"]
 radius = 4.0
 
 [node name="Ball" type="RigidBody2D"]
-mass = 0.001
-gravity_scale = 0.15
+mass = 0.025
+gravity_scale = 0.16
 can_sleep = false
 linear_velocity = Vector2(1, 1)
+script = ExtResource("1_eb1ap")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7nh6h")
