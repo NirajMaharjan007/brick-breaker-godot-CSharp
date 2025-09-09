@@ -22,13 +22,12 @@ public partial class Main : Node2D
     public override void _Process(double delta)
     {
         base._Process(delta);
-
-        paddle.CheckWall(camera2D);
-        ball.CheckWall(camera2D);
     }
 
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+        paddle.CheckWall(camera2D);
+        ball.CheckWall(camera2D);
     }
 }
