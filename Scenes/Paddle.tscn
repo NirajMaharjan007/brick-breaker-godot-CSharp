@@ -7,8 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://btyfgoni1y7bc" path="res://Assests/break assets/paddle/sp_paddle_strip2.png" id="5_7id55"]
 [ext_resource type="Texture2D" uid="uid://baevbw4uu4sqj" path="res://Assests/break assets/paddle/sp_paddle_transition_short_strip9.png" id="6_5pkwl"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wl6yx"]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_b3qnc"]
 atlas = ExtResource("2_mvo3y")
 region = Rect2(0, 0, 47, 18)
@@ -212,15 +210,20 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-script = ExtResource("1_8wypp")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wl6yx"]
+radius = 4.0
+height = 32.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("CapsuleShape2D_wl6yx")
+[node name="Paddle" type="CharacterBody2D"]
+script = ExtResource("1_8wypp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6eb5c")
-animation = &"long_animation"
+animation = &"short_moving"
 autoplay = "short_moving"
-frame_progress = 0.0504782
+frame_progress = 0.160752
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wl6yx")
