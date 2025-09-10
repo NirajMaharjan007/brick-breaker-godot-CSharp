@@ -6,9 +6,14 @@ public partial class Paddle : StaticBody2D
 {
     private const int SPEED = 200;
 
+    public float Width =>
+        (GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D).Size.X;
+
     public override void _Ready()
     {
         base._Ready();
+
+        GD.Print($"WIDTH -> {Width}");
     }
 
     public override void _Process(double delta)

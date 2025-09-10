@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace MyGame.Scripts;
@@ -14,9 +15,11 @@ public partial class Main : Node2D
     {
         base._Ready();
 
-        paddle = GetNode<Paddle>("Paddle");
-        ball = GetNode<Ball>("Ball");
         camera2D = GetNode<Camera2D>("Camera2D");
+
+        paddle = GetNode<Paddle>("Paddle");
+
+        ball = GetNode<Ball>("Ball");
     }
 
     public override void _Process(double delta)

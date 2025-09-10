@@ -9,6 +9,11 @@ public partial class Ball : RigidBody2D
     public override void _Ready()
     {
         base._Ready();
+        BodyEntered += (Node body) =>
+        {
+            GD.Print($"body {body.Name}");
+        };
+        LinearVelocity = new Vector2(0, -SPEED);
     }
 
     public override void _Process(double delta)
@@ -32,7 +37,7 @@ public partial class Ball : RigidBody2D
         float right = camera.LimitRight - 50;
 
         float bottom = camera.LimitBottom - 150;
-        float top = camera.LimitTop + 20;
+        float top = camera.LimitTop;
 
         var vel = LinearVelocity;
 
@@ -40,16 +45,25 @@ public partial class Ball : RigidBody2D
         {
             vel.X = -vel.X;
         }
-        else if (pos.Y > bottom)
+        else if (pos.Y > bottom || pos.Y < top)
         {
             vel.Y = -vel.Y;
         }
 
         LinearVelocity = vel.Normalized() * SPEED;
 
-        GD.Print(pos);
-        GD.Print("VEL " + vel);
+        // GD.Print(pos);
+        // GD.Print("VEL " + vel);
     }
 
-    public void PaddleHit(Paddle paddle) { }
+    public void PaddleHit(Paddle paddle)
+    {
+        float hitPosition = (GlobalPosition.X - paddle.GlobalPosition.X) / (paddle.Width / 2f);
+        hitPosition = Mathf.Clamp(hitPosition, -1f, 1f);
+
+        // Bounce direction (X depends on hit position, Y always up)
+        Vector2 newVelocity = new Vector2(hitPosition, -1).Normalized() * SPEED;
+
+        LinearVelocity = newVelocity;
+    }
 }
