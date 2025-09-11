@@ -6,13 +6,14 @@ public partial class Ball : RigidBody2D
 {
     private const int SPEED = 300;
 
+    private Area2D area2D;
+
     public override void _Ready()
     {
         base._Ready();
-        BodyEntered += (Node body) =>
-        {
-            GD.Print($"body {body.Name}");
-        };
+        area2D = GetNode<Area2D>("Area2D");
+        area2D.BodyEntered += OnBodyEntered;
+
         LinearVelocity = new Vector2(0, -SPEED);
     }
 
@@ -56,14 +57,22 @@ public partial class Ball : RigidBody2D
         // GD.Print("VEL " + vel);
     }
 
-    public void PaddleHit(Paddle paddle)
+    private void PaddleHit(Paddle paddle)
     {
-        float hitPosition = (GlobalPosition.X - paddle.GlobalPosition.X) / (paddle.Width / 2f);
-        hitPosition = Mathf.Clamp(hitPosition, -1f, 1f);
-
         // Bounce direction (X depends on hit position, Y always up)
-        Vector2 newVelocity = new Vector2(hitPosition, -1).Normalized() * SPEED;
+        Vector2 newVelocity = new Vector2(0, -1).Normalized() * SPEED;
 
         LinearVelocity = newVelocity;
     }
+
+    private void OnBodyEntered(Node body)
+    {
+        GD.Print($"THIS BODY -> {body.Name}");
+        if (body.Name.ToString().Equals("Paddle"))
+        {
+            PaddleHit(body as Paddle);
+        }
+    }
+
+    public void HitSound() { }
 }
