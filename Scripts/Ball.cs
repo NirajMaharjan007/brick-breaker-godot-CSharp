@@ -6,6 +6,8 @@ public partial class Ball : RigidBody2D
 {
     private const int SPEED = 300;
 
+    private AudioStreamPlayer2D hitSound;
+
     private Area2D area2D;
 
     public override void _Ready()
@@ -13,6 +15,8 @@ public partial class Ball : RigidBody2D
         base._Ready();
         area2D = GetNode<Area2D>("Area2D");
         area2D.BodyEntered += OnBodyEntered;
+
+        hitSound = GetNode<AudioStreamPlayer2D>("HitSound");
 
         LinearVelocity = new Vector2(0, -SPEED);
     }
@@ -71,8 +75,12 @@ public partial class Ball : RigidBody2D
         if (body.Name.ToString().Equals("Paddle"))
         {
             PaddleHit(body as Paddle);
+            HitSound();
         }
     }
 
-    public void HitSound() { }
+    public void HitSound()
+    {
+        hitSound.Play();
+    }
 }

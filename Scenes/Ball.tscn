@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnwbvcj75m6jc"]
+[gd_scene load_steps=5 format=3 uid="uid://dnwbvcj75m6jc"]
 
 [ext_resource type="Texture2D" uid="uid://b0uncwqd3ruhw" path="res://Assests/break assets/misc/red_ball.png" id="1_7nh6h"]
 [ext_resource type="Script" uid="uid://dae0ewljixxyp" path="res://Scripts/Ball.cs" id="1_eb1ap"]
+[ext_resource type="AudioStream" uid="uid://d3x5xww7gtahf" path="res://Assests/sound/mixkit-light-impact-on-the-ground-2070.wav" id="3_27lt3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eb1ap"]
 radius = 4.0
@@ -24,3 +25,8 @@ shape = SubResource("CircleShape2D_eb1ap")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_eb1ap")
 debug_color = Color(0.760784, 0.176471, 1, 0.227451)
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_27lt3")
+volume_db = 16.0
+pitch_scale = 1.54
