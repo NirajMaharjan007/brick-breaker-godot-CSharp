@@ -15,6 +15,7 @@ public partial class Ball : RigidBody2D
         base._Ready();
         area2D = GetNode<Area2D>("Area2D");
         area2D.BodyEntered += OnBodyEntered;
+        area2D.BodyExited += OnBodyExited;
 
         hitSound = GetNode<AudioStreamPlayer2D>("HitSound");
 
@@ -49,10 +50,12 @@ public partial class Ball : RigidBody2D
         if (pos.X <= left || pos.X >= right)
         {
             vel.X = -vel.X;
+            HitSound();
         }
         else if (pos.Y > bottom || pos.Y < top)
         {
             vel.Y = -vel.Y;
+            HitSound();
         }
 
         LinearVelocity = vel.Normalized() * SPEED;
@@ -71,7 +74,6 @@ public partial class Ball : RigidBody2D
 
     private void OnBodyEntered(Node body)
     {
-        GD.Print($"THIS BODY -> {body.Name}");
         if (body.Name.ToString().Equals("Paddle"))
         {
             PaddleHit(body as Paddle);
@@ -79,8 +81,32 @@ public partial class Ball : RigidBody2D
         }
     }
 
+    private void OnBodyExited(Node body)
+    {
+        if (body.Name.ToString().Equals("Paddle"))
+        {
+            HitSoundStop();
+        }
+    }
+
     public void HitSound()
     {
         hitSound.Play();
+    }
+
+    public void HitSoundStop()
+    {
+        hitSound.Stop();
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        if (area2D is not null)
+        {
+            area2D.BodyEntered -= OnBodyEntered;
+            area2D.BodyExited -= OnBodyExited;
+        }
     }
 }
