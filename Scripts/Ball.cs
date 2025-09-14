@@ -95,8 +95,8 @@ public partial class Ball : RigidBody2D
         }
         else if (body.Name.ToString().Equals("Brick"))
         {
-            if (body is Brick brick)
-                BrickHit(brick);
+            // if (body is Brick brick)
+            BrickHit(body as Brick);
 
             HitSound();
         }
