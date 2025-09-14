@@ -64,9 +64,8 @@ public partial class Ball : RigidBody2D
         // GD.Print("VEL " + vel);
     }
 
-    private void PaddleHit(Paddle paddle)
+    private void PaddleHit()
     {
-        // Bounce direction (X depends on hit position, Y always up)
         Vector2 newVelocity = new Vector2(0, -1).Normalized() * SPEED;
 
         LinearVelocity = newVelocity;
@@ -76,7 +75,7 @@ public partial class Ball : RigidBody2D
     {
         if (body.Name.ToString().Equals("Paddle"))
         {
-            PaddleHit(body as Paddle);
+            PaddleHit();
             HitSound();
         }
     }
