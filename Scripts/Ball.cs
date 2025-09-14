@@ -71,21 +71,40 @@ public partial class Ball : RigidBody2D
         LinearVelocity = newVelocity;
     }
 
+    private void BrickHit(Brick brick)
+    {
+        GD.Print("BRICK width " + brick.Width);
+
+        // Relative hit position (-1 = left, 0 = center, +1 = right)
+        float hitPos = (GlobalPosition.X - brick.GlobalPosition.X) / (brick.Width / 2f);
+        hitPos = Mathf.Clamp(hitPos, -1f, 1f);
+
+        // New bounce direction (X depends on hit, Y always up)
+        Vector2 newVelocity = new Vector2(hitPos, -1).Normalized() * SPEED;
+
+        LinearVelocity = newVelocity;
+    }
+
     private void OnBodyEntered(Node body)
     {
+        GD.Print(body.Name);
         if (body.Name.ToString().Equals("Paddle"))
         {
             PaddleHit();
+            HitSound();
+        }
+        else if (body.Name.ToString().Equals("Brick"))
+        {
+            if (body is Brick brick)
+                BrickHit(brick);
+
             HitSound();
         }
     }
 
     private void OnBodyExited(Node body)
     {
-        if (body.Name.ToString().Equals("Paddle"))
-        {
-            HitSoundStop();
-        }
+        HitSoundStop();
     }
 
     public void HitSound()

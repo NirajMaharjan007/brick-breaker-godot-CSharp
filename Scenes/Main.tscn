@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://brxyh5c6gy2wl"]
+[gd_scene load_steps=5 format=3 uid="uid://brxyh5c6gy2wl"]
 
 [ext_resource type="Script" uid="uid://cyt5hh1ayt4sl" path="res://Scripts/Main.cs" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://cri64e56cab4b" path="res://Scenes/Paddle.tscn" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://dnwbvcj75m6jc" path="res://Scenes/Ball.tscn" id="2_kln2b"]
+[ext_resource type="PackedScene" uid="uid://buy7k8nreu7qp" path="res://Scenes/Brick.tscn" id="4_rgh2o"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
 
 [node name="Ball" parent="." instance=ExtResource("2_kln2b")]
-position = Vector2(100, 351)
+position = Vector2(36, 65)
 
 [node name="Paddle" parent="." instance=ExtResource("2_idj7w")]
 position = Vector2(50, 400)
@@ -22,3 +23,6 @@ limit_top = 0
 limit_right = 800
 limit_bottom = 600
 limit_smoothed = true
+
+[node name="Brick" parent="." instance=ExtResource("4_rgh2o")]
+position = Vector2(34, 17)
