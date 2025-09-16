@@ -23,11 +23,15 @@ public partial class Brick : StaticBody2D
     public float Height =>
         (GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D).Size.Y;
 
+    private CollisionShape2D collisionShape2D;
+
     public override void _Ready()
     {
         base._Ready();
 
         GD.Print($"Brick Width {Width} and height {Height}");
+
+        collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
 
         Init();
     }
@@ -75,6 +79,21 @@ public partial class Brick : StaticBody2D
                 sprite.Texture = texture;
                 break;
         }
+    }
+
+    public void DisableBrickCompletely()
+    {
+        // For Area2D bricks
+        Visible = false;
+
+        // Disable collision shape
+        // collisionShape2D.CallDeferred("set_disabled", true);
+        // collisionShape2D.SetDeferred("disabled", true);
+        Callable.From(() => collisionShape2D.Disabled = true).CallDeferred();
+        // Stop all processing
+        ProcessMode = ProcessModeEnum.Disabled;
+
+        CallDeferred("queue_free");
     }
 
     public override void _PhysicsProcess(double delta)

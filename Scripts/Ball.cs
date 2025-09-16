@@ -19,7 +19,7 @@ public partial class Ball : RigidBody2D
 
         hitSound = GetNode<AudioStreamPlayer2D>("HitSound");
 
-        LinearVelocity = new Vector2(0, -SPEED);
+        LinearVelocity = new Vector2(0, SPEED);
     }
 
     public override void _Process(double delta)
@@ -64,40 +64,56 @@ public partial class Ball : RigidBody2D
         // GD.Print("VEL " + vel);
     }
 
-    private void PaddleHit()
+    private void Hit()
     {
         Vector2 newVelocity = new Vector2(0, -1).Normalized() * SPEED;
 
         LinearVelocity = newVelocity;
     }
 
-    private void BrickHit(Brick brick)
+    private void RandomizeDirection(Brick brick)
     {
-        GD.Print("BRICK width " + brick.Width);
+        // Get brick center position
+        Vector2 brickCenter = brick.GlobalPosition;
 
-        // Relative hit position (-1 = left, 0 = center, +1 = right)
-        float hitPos = (GlobalPosition.X - brick.GlobalPosition.X) / (brick.Width / 2f);
-        hitPos = Mathf.Clamp(hitPos, -1f, 1f);
+        // Calculate hit position relative to brick center
+        float relativeHitX = (GlobalPosition.X - brickCenter.X) / (brick.Width / 2);
+        float relativeHitY = (GlobalPosition.Y - brickCenter.Y) / (brick.Height / 2);
 
-        // New bounce direction (X depends on hit, Y always up)
-        Vector2 newVelocity = new Vector2(hitPos, -1).Normalized() * SPEED;
+        // Add randomness based on hit location
+        float randomAngle = GD.RandRange(-1, 1); // Small random variation
 
-        LinearVelocity = newVelocity;
+        // Calculate new direction based on hit position
+        Vector2 newDirection = LinearVelocity.Normalized();
+
+        // Add horizontal influence based on where ball hit the brick
+        newDirection.X += relativeHitX * 0.3f;
+        newDirection.Y += relativeHitY * 0.2f;
+
+        // Add random variation
+        newDirection.X += randomAngle;
+        newDirection.Y += randomAngle * 0.5f;
+
+        // Normalize and apply
+        LinearVelocity = newDirection.Normalized() * LinearVelocity.Length();
+
+        // Optional: Small speed increase
+        LinearVelocity *= 1.02f;
     }
 
     private void OnBodyEntered(Node body)
     {
-        GD.Print(body.Name);
+        GD.Print(body.Name + $" Brick {body is Brick}");
+
         if (body.Name.ToString().Equals("Paddle"))
         {
-            PaddleHit();
+            Hit();
             HitSound();
         }
-        else if (body.Name.ToString().Equals("Brick"))
+        else if (body is Brick brick)
+        // if (body.Name.ToString().StartsWith("Brick"))
         {
-            // if (body is Brick brick)
-            BrickHit(body as Brick);
-
+            RandomizeDirection(brick);
             HitSound();
         }
     }
@@ -105,6 +121,13 @@ public partial class Ball : RigidBody2D
     private void OnBodyExited(Node body)
     {
         HitSoundStop();
+
+        if (body is Brick brick)
+        {
+            brick.DisableBrickCompletely();
+            brick.QueueFree();
+            brick.Dispose();
+        }
     }
 
     public void HitSound()

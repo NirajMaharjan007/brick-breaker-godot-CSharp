@@ -4,7 +4,7 @@ namespace MyGame.Scripts;
 
 public partial class Paddle : StaticBody2D
 {
-    private const int SPEED = 200;
+    private const int SPEED = 320;
 
     public float Width =>
         (GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D).Size.X;
