@@ -29,7 +29,7 @@ public partial class Brick : StaticBody2D
     {
         base._Ready();
 
-        GD.Print($"Brick Width {Width} and height {Height}");
+        // GD.Print($"Brick Width {Width} and height {Height}");
 
         collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
 

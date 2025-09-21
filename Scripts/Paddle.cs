@@ -13,7 +13,7 @@ public partial class Paddle : StaticBody2D
     {
         base._Ready();
 
-        GD.Print($"WIDTH -> {Width}");
+        // GD.Print($"WIDTH -> {Width}");
     }
 
     public override void _Process(double delta)

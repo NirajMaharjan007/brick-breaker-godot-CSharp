@@ -25,6 +25,8 @@ public partial class Ball : RigidBody2D
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+        GD.Print($"BALLS LINER VELO-> {LinearVelocity}");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -50,12 +52,20 @@ public partial class Ball : RigidBody2D
         if (pos.X <= left || pos.X >= right)
         {
             vel.X = -vel.X;
-            HitSound();
+
+            int randomY = GD.RandRange(-1, 1); // -1, 0, or 1
+            vel.Y += randomY * 64;
+
+            vel.Y += randomY * 64;
         }
-        else if (pos.Y > bottom || pos.Y < top)
+        else if (pos.Y >= bottom || pos.Y <= top)
         {
+            // Flip Y so it bounces vertically
             vel.Y = -vel.Y;
-            HitSound();
+
+            // Add random X variation so bounce isn’t predictable
+            int randomX = GD.RandRange(-1, 1); // -1, 0, or 1
+            vel.X += randomX * 64;
         }
 
         LinearVelocity = vel.Normalized() * SPEED;
@@ -103,41 +113,26 @@ public partial class Ball : RigidBody2D
 
     private void OnBodyEntered(Node body)
     {
-        GD.Print(body.Name + $" Brick {body is Brick}");
+        // GD.Print(body.Name + $" Brick {body is Brick}");
 
         if (body.Name.ToString().Equals("Paddle"))
         {
             Hit();
-            HitSound();
         }
         else if (body is Brick brick)
-        // if (body.Name.ToString().StartsWith("Brick"))
         {
             RandomizeDirection(brick);
-            HitSound();
         }
     }
 
     private void OnBodyExited(Node body)
     {
-        HitSoundStop();
-
         if (body is Brick brick)
         {
             brick.DisableBrickCompletely();
             brick.QueueFree();
             brick.Dispose();
         }
-    }
-
-    public void HitSound()
-    {
-        hitSound.Play();
-    }
-
-    public void HitSoundStop()
-    {
-        hitSound.Stop();
     }
 
     public override void _ExitTree()
