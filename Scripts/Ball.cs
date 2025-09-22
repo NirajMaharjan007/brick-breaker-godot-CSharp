@@ -80,6 +80,7 @@ public partial class Ball : RigidBody2D
             }
             catch (System.Exception e)
             {
+                Position = new Vector2(170.0f, 250.0f);
                 GD.PushError(e);
                 GD.PrintErr($"Error -> {e.ToString()}");
             }
