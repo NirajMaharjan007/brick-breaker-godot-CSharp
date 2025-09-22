@@ -226,3 +226,4 @@ frame_progress = 0.160752
 position = Vector2(9.53674e-07, -4.5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_mvo3y")
+one_way_collision = true
