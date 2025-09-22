@@ -10,6 +10,8 @@ public partial class Ball : RigidBody2D
 
     private Area2D area2D;
 
+    private Paddle Entity { set; get; }
+
     public override void _Ready()
     {
         base._Ready();
@@ -41,8 +43,8 @@ public partial class Ball : RigidBody2D
     {
         Vector2 pos = Position;
 
-        float left = camera.LimitLeft + 16;
-        float right = camera.LimitRight - 50;
+        float left = camera.LimitLeft;
+        float right = camera.LimitRight - 32;
 
         float bottom = camera.LimitBottom - 150;
         float top = camera.LimitTop;
@@ -58,7 +60,7 @@ public partial class Ball : RigidBody2D
 
             vel.Y += randomY * 64;
         }
-        else if (pos.Y >= bottom || pos.Y <= top)
+        else if (pos.Y <= top - 24)
         {
             // Flip Y so it bounces vertically
             vel.Y = -vel.Y;
@@ -66,6 +68,21 @@ public partial class Ball : RigidBody2D
             // Add random X variation so bounce isn’t predictable
             int randomX = GD.RandRange(-1, 1); // -1, 0, or 1
             vel.X += randomX * 64;
+        }
+        else if (pos.Y >= bottom)
+        {
+            try
+            {
+                if (Entity is not null)
+                    Position = new Vector2(Entity.Position.X, Entity.Position.Y - 20);
+                else
+                    throw new("Error Paddle Entity");
+            }
+            catch (System.Exception e)
+            {
+                GD.PushError(e);
+                GD.PrintErr($"Error -> {e.ToString()}");
+            }
         }
 
         LinearVelocity = vel.Normalized() * SPEED;
@@ -115,8 +132,9 @@ public partial class Ball : RigidBody2D
     {
         // GD.Print(body.Name + $" Brick {body is Brick}");
 
-        if (body.Name.ToString().Equals("Paddle"))
+        if (body is Paddle paddle)
         {
+            Entity = paddle;
             Hit();
         }
         else if (body is Brick brick)
@@ -139,10 +157,37 @@ public partial class Ball : RigidBody2D
     {
         base._ExitTree();
 
-        if (area2D is not null)
+        if (this is not null)
         {
-            area2D.BodyEntered -= OnBodyEntered;
-            area2D.BodyExited -= OnBodyExited;
+            try
+            {
+                var collision = GetNode<CollisionShape2D>("CollisionShape2D");
+
+                if (area2D is not null)
+                {
+                    area2D.BodyEntered -= OnBodyEntered;
+                    area2D.BodyExited -= OnBodyExited;
+                    area2D.Dispose();
+                }
+
+                if (collision is not null)
+                {
+                    Callable.From(() => collision.Disabled = true).CallDeferred();
+                    // Stop all processing
+                    ProcessMode = ProcessModeEnum.Disabled;
+
+                    CallDeferred("queue_free");
+                }
+            }
+            catch (System.Exception e)
+            {
+                GD.PrintErr($"Error -> {e.ToString()}");
+            }
+            finally
+            {
+                Visible = false;
+                Dispose();
+            }
         }
     }
 }
