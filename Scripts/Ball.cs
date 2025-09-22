@@ -10,11 +10,36 @@ public partial class Ball : RigidBody2D
 
     private Area2D area2D;
 
+    private Sprite2D sprite;
+
     private Paddle Entity { set; get; }
+
+    private static class BallColor
+    {
+        public const string RED = "res://Assests/break assets/misc/red_ball.png",
+            YELLOW = "res://Assests/break assets/misc/yellow_ball.png",
+            BLUE = "res://Assests/break assets/misc/blue_ball.png",
+            ORANGE = "res://Assests/break assets/misc/orange_ball.png";
+    }
 
     public override void _Ready()
     {
         base._Ready();
+        sprite = GetNode<Sprite2D>("Sprite2D");
+
+        int value = GD.RandRange(1, 4);
+        string path = value switch
+        {
+            1 => BallColor.RED,
+            2 => BallColor.BLUE,
+            3 => BallColor.ORANGE,
+            4 => BallColor.YELLOW,
+            _ => BallColor.RED,
+        };
+
+        sprite.Texture = GD.Load<Texture2D>(path);
+        GD.Print($"BALL TEXTURE {sprite.Texture.ResourcePath} Value {value}");
+
         area2D = GetNode<Area2D>("Area2D");
         area2D.BodyEntered += OnBodyEntered;
         area2D.BodyExited += OnBodyExited;
@@ -39,6 +64,21 @@ public partial class Ball : RigidBody2D
             LinearVelocity = LinearVelocity.Normalized() * SPEED;
     }
 
+    public void ResetPosition()
+    {
+        try
+        {
+            if (Entity is not null)
+                Position = new Vector2(Entity.Position.X, Entity.Position.Y - 20);
+        }
+        catch (System.Exception e)
+        {
+            Position = new Vector2(170.0f, 250.0f);
+            GD.PushError(e);
+            GD.PrintErr($"Error -> {e.ToString()}");
+        }
+    }
+
     public void CheckWall(Camera2D camera)
     {
         Vector2 pos = Position;
@@ -47,7 +87,7 @@ public partial class Ball : RigidBody2D
         float right = camera.LimitRight - 32;
 
         float bottom = camera.LimitBottom - 150;
-        float top = camera.LimitTop;
+        float top = camera.LimitTop - 32;
 
         var vel = LinearVelocity;
 
