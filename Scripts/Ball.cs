@@ -202,22 +202,11 @@ public partial class Ball : RigidBody2D
         {
             try
             {
-                var collision = GetNode<CollisionShape2D>("CollisionShape2D");
-
                 if (area2D is not null)
                 {
                     area2D.BodyEntered -= OnBodyEntered;
                     area2D.BodyExited -= OnBodyExited;
                     area2D.Dispose();
-                }
-
-                if (collision is not null)
-                {
-                    Callable.From(() => collision.Disabled = true).CallDeferred();
-                    // Stop all processing
-                    ProcessMode = ProcessModeEnum.Disabled;
-
-                    CallDeferred("queue_free");
                 }
             }
             catch (System.Exception e)
