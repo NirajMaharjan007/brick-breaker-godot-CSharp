@@ -12,14 +12,9 @@ public partial class Main : Node2D
 
     private Node2D bricksContainer;
 
-    private Area2D detectionArea;
-
     public override void _Ready()
     {
         base._Ready();
-
-        detectionArea = GetNode<Area2D>("DetectionArea");
-        detectionArea.BodyEntered += OnBodyEntered;
 
         camera2D = GetNode<Camera2D>("Camera2D");
 
@@ -73,12 +68,6 @@ public partial class Main : Node2D
         ball.CheckWall(camera2D);
     }
 
-    private void OnBodyEntered(Node body)
-    {
-        if (body.Name.ToString().Equals("DetectionArea"))
-            ball.ResetPosition();
-    }
-
     public override void _ExitTree()
     {
         base._ExitTree();
@@ -87,20 +76,15 @@ public partial class Main : Node2D
         {
             if (this is not null)
             {
-                if (detectionArea is not null)
-                {
-                    detectionArea.BodyEntered -= OnBodyEntered;
-                }
+                Dispose();
+                System.Environment.Exit(0);
             }
         }
         catch (System.Exception e)
         {
             GD.PushError(e);
             GD.PrintErr(e.ToString());
-        }
-        finally
-        {
-            Dispose();
+            System.Environment.Exit(-1);
         }
     }
 }

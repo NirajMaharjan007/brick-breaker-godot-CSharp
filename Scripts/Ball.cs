@@ -64,21 +64,6 @@ public partial class Ball : RigidBody2D
             LinearVelocity = LinearVelocity.Normalized() * SPEED;
     }
 
-    public void ResetPosition()
-    {
-        try
-        {
-            if (Entity is not null)
-                Position = new Vector2(Entity.Position.X, Entity.Position.Y - 20);
-        }
-        catch (System.Exception e)
-        {
-            Position = new Vector2(170.0f, 250.0f);
-            GD.PushError(e);
-            GD.PrintErr($"Error -> {e.ToString()}");
-        }
-    }
-
     public void CheckWall(Camera2D camera)
     {
         Vector2 pos = Position;
@@ -87,7 +72,7 @@ public partial class Ball : RigidBody2D
         float right = camera.LimitRight - 32;
 
         float bottom = camera.LimitBottom - 150;
-        float top = camera.LimitTop + 48;
+        float top = camera.LimitTop + 32;
 
         var vel = LinearVelocity;
 

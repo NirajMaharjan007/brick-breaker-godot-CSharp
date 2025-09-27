@@ -35,8 +35,3 @@ position = Vector2(24, 22)
 position = Vector2(360, 68.125)
 shape = SubResource("RectangleShape2D_kln2b")
 debug_color = Color(0.855496, 1, 0.780362, 0.42)
-
-[node name="DetectionArea" type="Area2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectionArea"]
-polygon = PackedVector2Array(-5, 441, -158, 440, -139, -98, 936, -87, 921, 440, 773, 439, 768, -3, -3, -6)
