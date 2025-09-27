@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnwbvcj75m6jc"]
+[gd_scene load_steps=6 format=3 uid="uid://dnwbvcj75m6jc"]
 
 [ext_resource type="Texture2D" uid="uid://b0uncwqd3ruhw" path="res://Assests/break assets/misc/red_ball.png" id="1_7nh6h"]
 [ext_resource type="Script" uid="uid://dae0ewljixxyp" path="res://Scripts/Ball.cs" id="1_eb1ap"]
@@ -7,12 +7,20 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_eb1ap"]
 radius = 4.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_27lt3"]
+radius = 7.0
+
 [node name="Ball" type="RigidBody2D"]
 mass = 0.025
 gravity_scale = 0.16
 can_sleep = false
 linear_velocity = Vector2(1, 1)
 script = ExtResource("1_eb1ap")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_27lt3")
+volume_db = 16.0
+pitch_scale = 1.54
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7nh6h")
@@ -23,10 +31,5 @@ shape = SubResource("CircleShape2D_eb1ap")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_eb1ap")
-debug_color = Color(0.760784, 0.176471, 1, 0.227451)
-
-[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_27lt3")
-volume_db = 16.0
-pitch_scale = 1.54
+shape = SubResource("CircleShape2D_27lt3")
+debug_color = Color(0.480899, 0.587265, 0, 0.42)

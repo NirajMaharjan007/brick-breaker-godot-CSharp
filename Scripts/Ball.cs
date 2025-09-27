@@ -87,7 +87,7 @@ public partial class Ball : RigidBody2D
         float right = camera.LimitRight - 32;
 
         float bottom = camera.LimitBottom - 150;
-        float top = camera.LimitTop - 32;
+        float top = camera.LimitTop + 48;
 
         var vel = LinearVelocity;
 
