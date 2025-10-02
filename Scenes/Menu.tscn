@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxnh0fsql2clq"]
+
+[ext_resource type="Texture2D" uid="uid://rqeisw7hctdr" path="res://Assests/break assets/misc/bg.png" id="1_3kf3n"]
+[ext_resource type="Script" uid="uid://dekhn3cy5os45" path="res://Scripts/Menu.cs" id="1_6pedr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3kf3n"]
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(1, 1, 1, 0.0941176)
+shadow_offset = Vector2(2, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6pedr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(550, 314)
+scale = Vector2(1, 1)
+zoom = Vector2(1.12, 1.12)
+
+[node name="Bg" type="Sprite2D" parent="Camera2D"]
+position = Vector2(4.33337, 0)
+scale = Vector2(2.87963, 2.87963)
+texture = ExtResource("1_3kf3n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 0
+offset_left = 369.0
+offset_top = 81.0
+offset_right = 743.0
+offset_bottom = 586.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Brick Bricker"
+label_settings = SubResource("LabelSettings_3kf3n")
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Start
+"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = "EXIT
+"
