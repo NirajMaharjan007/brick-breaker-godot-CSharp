@@ -32,7 +32,7 @@ public partial class Main : Node2D
 
         var areaSize = shape.Size;
 
-        var brickScene = GD.Load<PackedScene>("res://Scenes/Brick.tscn");
+        var brickScene = GD.Load<PackedScene>("res://Scenes/Game/Brick.tscn");
 
         var tempBrick = brickScene.Instantiate<Brick>();
         float brickWidth = tempBrick.Width;

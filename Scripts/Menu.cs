@@ -23,17 +23,17 @@ public partial class Menu : Control
 
     private void OnStartButtonPressed()
     {
-        var mainScene = GD.Load<PackedScene>("res://Scenes/Main.tscn");
+        var mainScene = GD.Load<PackedScene>("res://Scenes/Menu/Loading.tscn");
         if (mainScene == null)
         {
-            GD.PrintErr("Failed to load Main scene.");
+            GD.PrintErr("Failed to load 'Loading' scene.");
             return;
         }
 
         var mainNode = mainScene.Instantiate();
         if (mainNode == null)
         {
-            GD.PrintErr("Failed to instantiate Main scene.");
+            GD.PrintErr("Failed to instantiate 'Loading' scene.");
             return;
         }
 
