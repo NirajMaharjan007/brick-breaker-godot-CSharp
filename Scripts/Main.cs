@@ -59,6 +59,13 @@ public partial class Main : Node2D
     public override void _Process(double delta)
     {
         base._Process(delta);
+        if (ball is not null && paddle is not null)
+        {
+            // ball.Position = paddle.Position - new Vector2(0, paddle.Height - 16);
+            // GD.Print(
+            //     $"Ball Pos {ball.Position}, Ball SPEED {Ball.Speed} ,Paddle Pos {paddle.Position}, "
+            // );
+        }
     }
 
     public override void _PhysicsProcess(double delta)

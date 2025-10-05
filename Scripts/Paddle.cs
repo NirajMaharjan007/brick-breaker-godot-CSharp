@@ -10,6 +10,9 @@ public partial class Paddle : StaticBody2D
     public float Width =>
         (GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D).Size.X;
 
+    public float Height =>
+        (GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D).Size.Y;
+
     public override void _Ready()
     {
         base._Ready();

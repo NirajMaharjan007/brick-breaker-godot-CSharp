@@ -22,11 +22,11 @@ public partial class Loading : Node
     {
         base._Process(delta);
 
-        targetValue += 16;
+        targetValue += 5;
         progressBar.Value = Mathf.MoveToward(
             (float)progressBar.Value,
             (float)targetValue,
-            (float)(64 * delta) // speed of fill
+            (float)(100 * delta) // speed of fill
         );
 
         GD.Print($"Progress: {progressBar.Value}/{progressBar.MaxValue}");

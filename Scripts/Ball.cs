@@ -14,6 +14,8 @@ public partial class Ball : RigidBody2D
 
     private Paddle Entity { set; get; }
 
+    public static int Speed => SPEED;
+
     private static class BallColor
     {
         public const string RED = "res://Assests/break assets/misc/red_ball.png",
@@ -149,9 +151,6 @@ public partial class Ball : RigidBody2D
 
         // Normalize and apply
         LinearVelocity = newDirection.Normalized() * LinearVelocity.Length();
-
-        // Optional: Small speed increase
-        LinearVelocity *= 1.02f;
     }
 
     private void OnBodyEntered(Node body)
