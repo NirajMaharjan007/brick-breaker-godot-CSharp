@@ -74,27 +74,29 @@ public partial class Ball : RigidBody2D
         float right = camera.LimitRight - 32;
 
         float bottom = camera.LimitBottom - 150;
-        float top = camera.LimitTop + 32;
+        float top = camera.LimitTop + 16;
 
         var vel = LinearVelocity;
 
-        if (pos.X <= left || pos.X >= right)
+        // --- LEFT / RIGHT bounce ---
+        if (pos.X <= left)
         {
-            vel.X = -vel.X;
-
-            int randomY = GD.RandRange(-1, 1); // -1, 0, or 1
-            vel.Y += randomY * 64;
-
-            vel.Y += randomY * 64;
+            pos.X = left + 4; // push slightly away from wall
+            vel.X = System.MathF.Abs(vel.X); // ensure moving right
+            vel.Y += GD.RandRange(-64, 64);
         }
-        else if (pos.Y <= top - 24)
+        else if (pos.X >= right)
         {
-            // Flip Y so it bounces vertically
-            vel.Y = -vel.Y;
-
-            // Add random X variation so bounce isn’t predictable
-            int randomX = GD.RandRange(-1, 1); // -1, 0, or 1
-            vel.X += randomX * 64;
+            pos.X = right - 4;
+            vel.X = -System.MathF.Abs(vel.X); // ensure moving left
+            vel.Y += GD.RandRange(-64, 64);
+        }
+        // --- TOP bounce ---
+        else if (pos.Y <= top)
+        {
+            pos.Y = top + 4;
+            vel.Y = System.MathF.Abs(vel.Y); // ensure moving down
+            vel.X += GD.RandRange(-64, 64);
         }
         else if (pos.Y >= bottom)
         {
