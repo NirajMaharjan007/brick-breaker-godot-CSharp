@@ -103,20 +103,20 @@ public partial class Ball : RigidBody2D
             try
             {
                 if (Entity is not null)
-                    Position = new Vector2(Entity.Position.X, Entity.Position.Y - 20);
+                    pos = new Vector2(Entity.Position.X, Entity.Position.Y - 20);
                 else
                     throw new("Error Paddle Entity");
             }
             catch (System.Exception e)
             {
-                Position = new Vector2(170.0f, 250.0f);
+                pos = new Vector2(170.0f, 250.0f);
                 GD.PushError(e);
                 GD.PrintErr($"Error -> {e.ToString()}");
             }
         }
 
+        Position = pos;
         LinearVelocity = vel.Normalized() * SPEED;
-
         // GD.Print(pos);
         // GD.Print("VEL " + vel);
     }
