@@ -64,6 +64,10 @@ public partial class Ball : RigidBody2D
 
         if (!LinearVelocity.IsZeroApprox())
             LinearVelocity = LinearVelocity.Normalized() * SPEED;
+        else if (LinearVelocity.IsZeroApprox())
+        {
+            LinearVelocity = new Vector2(0, SPEED);
+        }
     }
 
     public void CheckWall(Camera2D camera)
@@ -74,7 +78,7 @@ public partial class Ball : RigidBody2D
         float right = camera.LimitRight - 32;
 
         float bottom = camera.LimitBottom - 150;
-        float top = camera.LimitTop + 16;
+        float top = camera.LimitTop + 4;
 
         var vel = LinearVelocity;
 

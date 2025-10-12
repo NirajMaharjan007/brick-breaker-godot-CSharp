@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dnwbvcj75m6jc" path="res://Scenes/Game/Ball.tscn" id="2_kln2b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
-size = Vector2(742, 159.75)
+size = Vector2(845, 150.5)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
@@ -14,16 +14,15 @@ script = ExtResource("1_r150o")
 position = Vector2(170, 250)
 
 [node name="Paddle" parent="." instance=ExtResource("2_idj7w")]
-position = Vector2(50, 408)
+position = Vector2(50, 452)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1, 0)
 anchor_mode = 0
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(1.32, 1.32)
 limit_left = 0
 limit_top = 0
-limit_right = 800
-limit_bottom = 600
+limit_right = 900
+limit_bottom = 700
 limit_smoothed = true
 
 [node name="BricksContainer" type="Node2D" parent="."]
@@ -32,6 +31,6 @@ position = Vector2(24, 22)
 [node name="Area2D" type="Area2D" parent="BricksContainer"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BricksContainer/Area2D"]
-position = Vector2(360, 68.125)
+position = Vector2(414, 90)
 shape = SubResource("RectangleShape2D_kln2b")
 debug_color = Color(0.855496, 1, 0.780362, 0.42)

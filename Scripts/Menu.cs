@@ -5,8 +5,8 @@ namespace MyGame.Scripts;
 public partial class Menu : Control
 {
     private VBoxContainer container;
-    private Button startButton;
-    private Button exitButton;
+    private TextureButton startButton;
+    private TextureButton exitButton;
 
     public override void _Ready()
     {
@@ -14,10 +14,10 @@ public partial class Menu : Control
 
         var buttonContainer = container.GetNode<VBoxContainer>("ButtonContainer");
 
-        startButton = buttonContainer.GetNode<Button>("StartButton");
+        startButton = buttonContainer.GetNode<TextureButton>("StartButton");
         startButton.Pressed += OnStartButtonPressed;
 
-        exitButton = buttonContainer.GetNode<Button>("ExitButton");
+        exitButton = buttonContainer.GetNode<TextureButton>("ExitButton");
         exitButton.Pressed += OnExitButtonPressed;
     }
 

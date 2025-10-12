@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c84s04wdgtxkc"]
+[gd_scene load_steps=8 format=3 uid="uid://c84s04wdgtxkc"]
 
 [ext_resource type="Script" uid="uid://dekhn3cy5os45" path="res://Scripts/Menu.cs" id="1_3kh17"]
 [ext_resource type="Texture2D" uid="uid://rqeisw7hctdr" path="res://Assests/break assets/misc/bg.png" id="2_kqkty"]
+[ext_resource type="Texture2D" uid="uid://bhtxm4oe8t6sp" path="res://Assests/ui_asset/png/PlayButton/Default.png" id="3_47xui"]
+[ext_resource type="Texture2D" uid="uid://bi07k5pkw66fa" path="res://Assests/ui_asset/png/PlayButton/Hover.png" id="4_47xui"]
+[ext_resource type="Texture2D" uid="uid://lpkw7whhb67m" path="res://Assests/ui_asset/png/ExitButton/Default.png" id="5_l7xyq"]
+[ext_resource type="Texture2D" uid="uid://dswfdh80q6sv3" path="res://Assests/ui_asset/png/ExitButton/Hover.png" id="6_h7084"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3kf3n"]
 font_size = 24
@@ -35,9 +39,9 @@ texture = ExtResource("2_kqkty")
 clip_contents = true
 layout_mode = 0
 offset_left = 369.0
-offset_top = 81.0
+offset_top = 97.0
 offset_right = 743.0
-offset_bottom = 586.0
+offset_bottom = 602.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -48,15 +52,19 @@ horizontal_alignment = 1
 
 [node name="ButtonContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 32
 
-[node name="StartButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+[node name="StartButton" type="TextureButton" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Start
-"
+texture_normal = ExtResource("3_47xui")
+texture_hover = ExtResource("4_47xui")
 
-[node name="ExitButton" type="Button" parent="VBoxContainer/ButtonContainer"]
+[node name="ExitButton" type="TextureButton" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
-text = "EXIT
-"
-expand_icon = true
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_l7xyq")
+texture_hover = ExtResource("6_h7084")

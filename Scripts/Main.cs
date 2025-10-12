@@ -54,6 +54,8 @@ public partial class Main : Node2D
                 bricksContainer.AddChild(brick);
             }
         }
+
+        // GetTree().Paused = true;
     }
 
     public override void _Process(double delta)
