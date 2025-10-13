@@ -42,6 +42,7 @@ offset_left = 369.0
 offset_top = 97.0
 offset_right = 743.0
 offset_bottom = 602.0
+theme_override_constants/separation = 28
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2

@@ -1,9 +1,56 @@
-[gd_scene format=3 uid="uid://jappobsnchdm"]
+[gd_scene load_steps=6 format=3 uid="uid://jappobsnchdm"]
+
+[ext_resource type="Texture2D" uid="uid://bhtxm4oe8t6sp" path="res://Assests/ui_asset/png/PlayButton/Default.png" id="1_sp30i"]
+[ext_resource type="Texture2D" uid="uid://bi07k5pkw66fa" path="res://Assests/ui_asset/png/PlayButton/Hover.png" id="2_em21j"]
+[ext_resource type="Texture2D" uid="uid://lpkw7whhb67m" path="res://Assests/ui_asset/png/ExitButton/Default.png" id="3_mxvtp"]
+[ext_resource type="Texture2D" uid="uid://dswfdh80q6sv3" path="res://Assests/ui_asset/png/ExitButton/Hover.png" id="4_qlelk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0vhp"]
+content_margin_left = 1.0
+content_margin_top = 8.0
+content_margin_right = 1.0
+content_margin_bottom = 8.0
 
 [node name="Loading" type="Control"]
 layout_mode = 3
-anchors_preset = 15
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Main" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -81.0
+offset_right = 87.0
+offset_bottom = 640.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Main"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l0vhp")
+text = "PAUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="ButtonContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureButton" type="TextureButton" parent="Main/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = ExtResource("1_sp30i")
+texture_hover = ExtResource("2_em21j")
+
+[node name="TextureButton2" type="TextureButton" parent="Main/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("3_mxvtp")
+texture_hover = ExtResource("4_qlelk")
