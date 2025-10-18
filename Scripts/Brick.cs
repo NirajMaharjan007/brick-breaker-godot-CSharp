@@ -17,6 +17,10 @@ public partial class Brick : StaticBody2D
     }
 
     private Sprite2D sprite;
+
+    private AudioStreamPlayer2D breakSound;
+
+    private Area2D area2D;
     public float Width =>
         (GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D).Size.X;
 
@@ -32,6 +36,11 @@ public partial class Brick : StaticBody2D
         // GD.Print($"Brick Width {Width} and height {Height}");
 
         collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
+
+        breakSound = GetNode<AudioStreamPlayer2D>("Break");
+
+        area2D = GetNode<Area2D>("Area2D");
+        area2D.BodyEntered += OnBodyEntered;
 
         Init();
     }
@@ -99,5 +108,14 @@ public partial class Brick : StaticBody2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+    }
+
+    private void OnBodyEntered(Node2D body)
+    {
+        GD.Print($"Brick Body Entered by {body is Ball}");
+        if (body is Ball)
+        {
+            breakSound.Play();
+        }
     }
 }

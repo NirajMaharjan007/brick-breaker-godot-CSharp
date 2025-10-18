@@ -55,7 +55,7 @@ public partial class Ball : RigidBody2D
     {
         base._Process(delta);
 
-        GD.Print($"BALLS LINER VELO-> {LinearVelocity}");
+        // GD.Print($"BALLS LINER VELO-> {LinearVelocity}");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -127,7 +127,8 @@ public partial class Ball : RigidBody2D
 
     private void Hit()
     {
-        Vector2 newVelocity = new Vector2(0, -1).Normalized() * SPEED;
+        float randomX = (float)GD.RandRange(-0.054f, 0.054f);
+        Vector2 newVelocity = new Vector2(randomX, -1).Normalized() * SPEED;
 
         LinearVelocity = newVelocity;
     }
@@ -166,6 +167,7 @@ public partial class Ball : RigidBody2D
         if (body is Paddle paddle)
         {
             Entity = paddle;
+            hitSound.Play();
             Hit();
         }
         else if (body is Brick brick)
