@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 namespace MyGame.Scripts;
@@ -41,6 +40,7 @@ public partial class Brick : StaticBody2D
 
         area2D = GetNode<Area2D>("Area2D");
         area2D.BodyEntered += OnBodyEntered;
+        area2D.BodyExited += OnBodyExited;
 
         Init();
     }
@@ -112,10 +112,51 @@ public partial class Brick : StaticBody2D
 
     private void OnBodyEntered(Node2D body)
     {
-        GD.Print($"Brick Body Entered by {body is Ball}");
+        // GD.Print($"Brick Body Entered by {body is Ball}");
+
         if (body is Ball)
         {
+            GD.Print("Brick Hit by Ball");
+            breakSound.Autoplay = true;
             breakSound.Play();
+            GD.Print($"Playing break sound {breakSound.Playing}");
+        }
+    }
+
+    private void OnBodyExited(Node2D body)
+    {
+        if (body is Ball && breakSound.Playing)
+        {
+            breakSound.Autoplay = false;
+            GD.Print($"Stopping break sound {breakSound.Playing}");
+        }
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        try
+        {
+            if (this is not null)
+            {
+                if (area2D is not null)
+                {
+                    area2D.BodyEntered -= OnBodyEntered;
+                    area2D.BodyExited -= OnBodyExited;
+                    area2D.Dispose();
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            GD.PushError(e);
+            GD.PrintErr($"Error -> {e.ToString()}");
+        }
+        finally
+        {
+            Visible = false;
+            QueueFree();
+            Dispose();
         }
     }
 }

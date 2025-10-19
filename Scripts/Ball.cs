@@ -88,12 +88,14 @@ public partial class Ball : RigidBody2D
             pos.X = left + 4; // push slightly away from wall
             vel.X = System.MathF.Abs(vel.X); // ensure moving right
             vel.Y += GD.RandRange(-64, 64);
+            hitSound.Play();
         }
         else if (pos.X >= right)
         {
             pos.X = right - 4;
             vel.X = -System.MathF.Abs(vel.X); // ensure moving left
             vel.Y += GD.RandRange(-64, 64);
+            hitSound.Play();
         }
         // --- TOP bounce ---
         else if (pos.Y <= top)
@@ -101,6 +103,7 @@ public partial class Ball : RigidBody2D
             pos.Y = top + 4;
             vel.Y = System.MathF.Abs(vel.Y); // ensure moving down
             vel.X += GD.RandRange(-64, 64);
+            hitSound.Play();
         }
         else if (pos.Y >= bottom)
         {
