@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bps53orc5x10k" path="res://Scripts/Brick.cs" id="1_0sywb"]
 [ext_resource type="Texture2D" uid="uid://qfwyuha3kice" path="res://Assests/break assets/bricks/sp_brick_green.png" id="2_ghbkf"]
-[ext_resource type="AudioStream" uid="uid://csjgvg223ltoe" path="res://Assests/sound/mixkit-water-bubble-1317.wav" id="3_ghbkf"]
+[ext_resource type="AudioStream" uid="uid://c1b5fn7pv3wxd" path="res://Assests/sound/glass breaking.wav" id="2_n0y15"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lskvi"]
 size = Vector2(19, 9)
@@ -14,9 +14,9 @@ size = Vector2(20, 10)
 script = ExtResource("1_0sywb")
 
 [node name="Break" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_ghbkf")
+stream = ExtResource("2_n0y15")
 volume_db = 16.0
-pitch_scale = 1.6
+pitch_scale = 1.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ghbkf")
