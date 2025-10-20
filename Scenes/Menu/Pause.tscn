@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://jappobsnchdm"]
+[gd_scene load_steps=7 format=3 uid="uid://jappobsnchdm"]
 
+[ext_resource type="Script" uid="uid://c8aosb2b8r4c2" path="res://Scripts/Pause.cs" id="1_em21j"]
 [ext_resource type="Texture2D" uid="uid://bhtxm4oe8t6sp" path="res://Assests/ui_asset/png/PlayButton/Default.png" id="1_sp30i"]
 [ext_resource type="Texture2D" uid="uid://bi07k5pkw66fa" path="res://Assests/ui_asset/png/PlayButton/Hover.png" id="2_em21j"]
 [ext_resource type="Texture2D" uid="uid://lpkw7whhb67m" path="res://Assests/ui_asset/png/ExitButton/Default.png" id="3_mxvtp"]
@@ -11,12 +12,13 @@ content_margin_top = 8.0
 content_margin_right = 1.0
 content_margin_bottom = 8.0
 
-[node name="Loading" type="Control"]
+[node name="Pause" type="Control"]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
+script = ExtResource("1_em21j")
 
 [node name="Main" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -39,14 +41,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
-[node name="TextureButton" type="TextureButton" parent="Main/ButtonContainer"]
+[node name="PlayButton" type="TextureButton" parent="Main/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture_normal = ExtResource("1_sp30i")
 texture_hover = ExtResource("2_em21j")
 
-[node name="TextureButton2" type="TextureButton" parent="Main/ButtonContainer"]
+[node name="ExitButton" type="TextureButton" parent="Main/ButtonContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8

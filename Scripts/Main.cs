@@ -10,6 +10,8 @@ public partial class Main : Node2D
 
     private Ball ball;
 
+    private Pause pause;
+
     private Node2D bricksContainer,
         pauseNode;
 
@@ -26,6 +28,17 @@ public partial class Main : Node2D
         ball = GetNode<Ball>("Ball");
 
         pauseNode = GetNode<Node2D>("Node2D");
+
+        pause = pauseNode.GetNode<Pause>("Pause");
+        pause.ResumePressed += () =>
+        {
+            GetTree().Paused = false;
+        };
+        pause.ExitPressed += () =>
+        {
+            GetTree().Quit();
+            System.Environment.Exit(0);
+        };
 
         bricksContainer = GetNode<Node2D>("BricksContainer");
 
@@ -75,6 +88,8 @@ public partial class Main : Node2D
             GD.Print("Level Complete!");
         }
 
+        // GetTree().Paused = pause.IsPaused;
+
         if (GetTree().Paused)
         {
             paddle.MoveIt = false;
@@ -92,6 +107,24 @@ public partial class Main : Node2D
         base._PhysicsProcess(delta);
         paddle.CheckWall(camera2D);
         ball.CheckWall(camera2D);
+    }
+
+    private void TogglePause()
+    {
+        if (GetTree().Paused)
+        {
+            // Unpause
+            GetTree().Paused = false;
+            pause.Visible = false;
+            paddle.MoveIt = true;
+        }
+        else
+        {
+            // Pause
+            GetTree().Paused = true;
+            pause.Visible = true;
+            paddle.MoveIt = false;
+        }
     }
 
     public override void _Input(InputEvent @event)
