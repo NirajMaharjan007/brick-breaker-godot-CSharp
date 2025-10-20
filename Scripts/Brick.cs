@@ -37,6 +37,8 @@ public partial class Brick : StaticBody2D
         collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
 
         breakSound = GetNode<AudioStreamPlayer2D>("Break");
+        breakSound.Autoplay = false;
+        breakSound.Bus = "SFX";
 
         area2D = GetNode<Area2D>("Area2D");
         area2D.BodyEntered += OnBodyEntered;
@@ -117,19 +119,28 @@ public partial class Brick : StaticBody2D
         if (body is Ball)
         {
             GD.Print("Brick Hit by Ball");
-            breakSound.Autoplay = true;
-            breakSound.Play();
+            PlayBreakSound();
             GD.Print($"Playing break sound {breakSound.Playing}");
         }
     }
 
     private void OnBodyExited(Node2D body)
     {
-        if (body is Ball && breakSound.Playing)
-        {
-            breakSound.Autoplay = false;
-            GD.Print($"Stopping break sound {breakSound.Playing}");
-        }
+        // TODO: FIX ME
+        // if (body is Ball && breakSound.Playing)
+        // {
+        //     GD.Print($"Stopping break sound {breakSound.Playing}");
+        // }
+    }
+
+    private void PlayBreakSound()
+    {
+        if (breakSound.Playing)
+            breakSound.Stop();
+
+        breakSound.PitchScale = (float)GD.RandRange(0.95f, 1.05f); // Subtle variation
+        breakSound.VolumeDb = (float)GD.RandRange(-5.0f, 0.0f); // Slight volume variation
+        breakSound.Play();
     }
 
     public override void _ExitTree()

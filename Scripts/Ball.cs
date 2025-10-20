@@ -170,7 +170,7 @@ public partial class Ball : RigidBody2D
         if (body is Paddle paddle)
         {
             Entity = paddle;
-            hitSound.Play();
+            PlayHitSound();
             Hit();
         }
         else if (body is Brick brick)
@@ -187,6 +187,16 @@ public partial class Ball : RigidBody2D
             brick.QueueFree();
             brick.Dispose();
         }
+    }
+
+    private void PlayHitSound()
+    {
+        if (hitSound.Playing)
+            hitSound.Stop();
+
+        // Reset to start position, then play
+        hitSound.Seek(0);
+        hitSound.Play();
     }
 
     public override void _ExitTree()

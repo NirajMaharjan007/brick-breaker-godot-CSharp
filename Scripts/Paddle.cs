@@ -13,6 +13,8 @@ public partial class Paddle : StaticBody2D
     public float Height =>
         (GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D).Size.Y;
 
+    public bool MoveIt { get; set; } = true;
+
     public override void _Ready()
     {
         base._Ready();
@@ -25,7 +27,9 @@ public partial class Paddle : StaticBody2D
     public override void _Process(double delta)
     {
         base._Process(delta);
-        Move(delta);
+
+        if (MoveIt)
+            Move(delta);
     }
 
     public override void _PhysicsProcess(double delta)

@@ -10,17 +10,22 @@ public partial class Main : Node2D
 
     private Ball ball;
 
-    private Node2D bricksContainer;
+    private Node2D bricksContainer,
+        pauseNode;
 
     public override void _Ready()
     {
         base._Ready();
+
+        ProcessMode = ProcessModeEnum.Always;
 
         camera2D = GetNode<Camera2D>("Camera2D");
 
         paddle = GetNode<Paddle>("Paddle");
 
         ball = GetNode<Ball>("Ball");
+
+        pauseNode = GetNode<Node2D>("Node2D");
 
         bricksContainer = GetNode<Node2D>("BricksContainer");
 
@@ -60,13 +65,25 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
+        // TODO: LEVEL CHANGE LOGIC
+
         base._Process(delta);
-        if (ball is not null && paddle is not null)
+
+        GD.Print($"Bricks left: {bricksContainer.GetChildCount()}");
+        if (bricksContainer.GetChildCount() == 0)
         {
-            // ball.Position = paddle.Position - new Vector2(0, paddle.Height - 16);
-            // GD.Print(
-            //     $"Ball Pos {ball.Position}, Ball SPEED {Ball.Speed} ,Paddle Pos {paddle.Position}, "
-            // );
+            GD.Print("Level Complete!");
+        }
+
+        if (GetTree().Paused)
+        {
+            paddle.MoveIt = false;
+            pauseNode.Visible = true;
+        }
+        else
+        {
+            paddle.MoveIt = true;
+            pauseNode.Visible = false;
         }
     }
 
@@ -75,6 +92,16 @@ public partial class Main : Node2D
         base._PhysicsProcess(delta);
         paddle.CheckWall(camera2D);
         ball.CheckWall(camera2D);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+        if (@event.IsActionPressed("ui_cancel")) // e.g. ESC key
+        {
+            GetTree().Paused = !GetTree().Paused;
+            GD.Print($"Game paused: {GetTree().Paused}");
+        }
     }
 
     public override void _ExitTree()

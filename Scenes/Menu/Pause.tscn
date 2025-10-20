@@ -20,12 +20,9 @@ grow_horizontal = 2
 
 [node name="Main" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -81.0
-offset_right = 87.0
-offset_bottom = 640.0
+offset_left = -571.0
+offset_right = 575.0
+offset_bottom = 252.0
 alignment = 1
 
 [node name="Label" type="Label" parent="Main"]
@@ -39,6 +36,7 @@ clip_text = true
 
 [node name="ButtonContainer" type="VBoxContainer" parent="Main"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 20
 
 [node name="TextureButton" type="TextureButton" parent="Main/ButtonContainer"]
