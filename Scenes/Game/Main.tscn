@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://brxyh5c6gy2wl"]
+[gd_scene load_steps=7 format=3 uid="uid://brxyh5c6gy2wl"]
 
 [ext_resource type="Script" uid="uid://cyt5hh1ayt4sl" path="res://Scripts/Main.cs" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://cri64e56cab4b" path="res://Scenes/Game/Paddle.tscn" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://dnwbvcj75m6jc" path="res://Scenes/Game/Ball.tscn" id="2_kln2b"]
+[ext_resource type="Texture2D" uid="uid://e655d3dm75k6" path="res://Assests/ui_asset/png/Untitled.png" id="4_c6dyv"]
 [ext_resource type="PackedScene" uid="uid://jappobsnchdm" path="res://Scenes/Menu/Pause.tscn" id="4_y4a8c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
@@ -38,6 +39,12 @@ debug_color = Color(0.855496, 1, 0.780362, 0.42)
 
 [node name="Node2D" type="Node2D" parent="."]
 visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Node2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_c6dyv")
+stretch_mode = 2
 
 [node name="Pause" parent="Node2D" instance=ExtResource("4_y4a8c")]
 anchors_preset = -1
