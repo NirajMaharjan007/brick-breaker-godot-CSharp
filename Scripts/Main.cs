@@ -12,6 +12,8 @@ public partial class Main : Node2D
 
     private Pause pause;
 
+    private RichTextLabel score;
+
     private Node2D bricksContainer,
         pauseNode;
 
@@ -20,6 +22,8 @@ public partial class Main : Node2D
         base._Ready();
 
         ProcessMode = ProcessModeEnum.Always;
+
+        score = GetNode<Node2D>("Misc").GetNode<RichTextLabel>("RichTextLabel");
 
         camera2D = GetNode<Camera2D>("Camera2D");
 
@@ -82,7 +86,7 @@ public partial class Main : Node2D
 
         base._Process(delta);
 
-        GD.Print($"Bricks left: {bricksContainer.GetChildCount() - 1}");
+        // GD.Print($"Bricks left: {bricksContainer.GetChildCount() - 1}");
         if (bricksContainer.GetChildCount() <= 1)
         {
             GD.Print("Level Complete!");

@@ -57,10 +57,10 @@ animations = [{
 script = ExtResource("1_r150o")
 
 [node name="Ball" parent="." instance=ExtResource("2_kln2b")]
-position = Vector2(170, 250)
+position = Vector2(66, 250)
 
 [node name="Paddle" parent="." instance=ExtResource("2_idj7w")]
-position = Vector2(50, 452)
+position = Vector2(53, 448)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -99,10 +99,19 @@ offset_top = 65.0
 offset_right = 436.0
 offset_bottom = 65.0
 
-[node name="Heart" type="Node2D" parent="."]
+[node name="Misc" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Misc"]
 position = Vector2(861, 478)
 sprite_frames = SubResource("SpriteFrames_cad5q")
 autoplay = "default"
-frame_progress = 0.4210564
+frame_progress = 0.08268187
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Misc"]
+offset_left = 6.0
+offset_top = 460.0
+offset_right = 156.0
+offset_bottom = 492.0
+text = "Score: 0"
+fit_content = true
+vertical_alignment = 1

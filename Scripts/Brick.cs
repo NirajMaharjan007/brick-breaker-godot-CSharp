@@ -15,6 +15,19 @@ public partial class Brick : StaticBody2D
             PURPLE = "res://Assests/break assets/bricks/sp_brick_purple.png";
     }
 
+    public interface IScore
+    {
+        public const int WHITE = 70,
+            BLACK = 60,
+            RED = 50,
+            GREEN = 40,
+            ORANGE = 30,
+            PINK = 20,
+            PURPLE = 10;
+    };
+
+    public int Score { get; private set; } = 0;
+
     private Sprite2D sprite;
 
     private AudioStreamPlayer2D breakSound;
@@ -131,6 +144,49 @@ public partial class Brick : StaticBody2D
         // {
         //     GD.Print($"Stopping break sound {breakSound.Playing}");
         // }
+
+        if (body is Ball)
+        {
+            var texture = sprite.Texture;
+            GD.Print($"Texture: {texture.ResourcePath}");
+            switch (texture.ResourcePath)
+            {
+                case ResourcesPath.BLACK:
+                    GD.Print(IScore.BLACK);
+                    Score = IScore.BLACK;
+                    break;
+
+                case ResourcesPath.WHITE:
+                    GD.Print(IScore.WHITE);
+                    Score = IScore.WHITE;
+                    break;
+
+                case ResourcesPath.ORANGE:
+                    GD.Print(IScore.ORANGE);
+                    Score = IScore.ORANGE;
+                    break;
+
+                case ResourcesPath.PINK:
+                    GD.Print(IScore.PINK);
+                    Score = IScore.PINK;
+                    break;
+
+                case ResourcesPath.RED:
+                    GD.Print(IScore.RED);
+                    Score = IScore.RED;
+                    break;
+
+                case ResourcesPath.GREEN:
+                    GD.Print(IScore.GREEN);
+                    Score = IScore.GREEN;
+                    break;
+
+                case ResourcesPath.PURPLE:
+                    GD.Print(IScore.PURPLE);
+                    Score = IScore.PURPLE;
+                    break;
+            }
+        }
     }
 
     private void PlayBreakSound()
