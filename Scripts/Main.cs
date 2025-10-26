@@ -82,8 +82,8 @@ public partial class Main : Node2D
 
         base._Process(delta);
 
-        GD.Print($"Bricks left: {bricksContainer.GetChildCount()}");
-        if (bricksContainer.GetChildCount() == 0)
+        GD.Print($"Bricks left: {bricksContainer.GetChildCount() - 1}");
+        if (bricksContainer.GetChildCount() <= 1)
         {
             GD.Print("Level Complete!");
         }

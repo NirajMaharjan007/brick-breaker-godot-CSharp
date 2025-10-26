@@ -14,6 +14,8 @@ public partial class Ball : RigidBody2D
 
     private Paddle Entity { set; get; }
 
+    public bool IsOutside { get; set; } = false;
+
     public static int Speed => SPEED;
 
     private static class BallColor
@@ -107,12 +109,18 @@ public partial class Ball : RigidBody2D
         }
         else if (pos.Y >= bottom)
         {
+            IsOutside = true;
+
             try
             {
                 if (Entity is not null)
+                {
                     pos = new Vector2(Entity.Position.X, Entity.Position.Y - 20);
+                }
                 else
+                {
                     throw new("Error Paddle Entity");
+                }
             }
             catch (System.Exception e)
             {
