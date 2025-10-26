@@ -10,22 +10,21 @@ Break all the bricks, keep the ball alive, and aim for the highest score!
 - Written entirely in **C#**
 
 - TODOS
-  - Paddle movement with **keyboard only**
-  - Ball physics with realistic bounces
-  - Multiple bricks and layouts
-  - Score tracking
-  - Lives system
-  - Simple particle effects when breaking bricks
+  - Paddle movement with **keyboard only** ✅
+  - Ball physics with realistic bounces ✅
+  - Multiple bricks ✅
+  - Score tracking ❌⌛
+  - Live Decrease if out of bound ⌛
 
 ### Release Plan
 
 1. Core Gameplay
+
    - Paddle movement
    - Ball bounces
-2. Visuals
-   - Particle effects
-   - Brick animations
-3. Extra
+   - Sound Effect
+
+2. Extra
    - Power-ups
    - High scores
 
@@ -37,3 +36,8 @@ Break all the bricks, keep the ball alive, and aim for the highest score!
 - .NET SDK **6.0 or newer**
 - A code editor (e.g. [Visual Studio Code](https://code.visualstudio.com/) or [Rider](https://www.jetbrains.com/rider/))
 - Git (optional, if you want to clone instead of downloading)
+
+## Thanks to
+
+- [Game Assets I](https://itch.io/)
+- [Game Assets II](https://craftpix.net/)
