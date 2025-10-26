@@ -1,13 +1,57 @@
-[gd_scene load_steps=7 format=3 uid="uid://brxyh5c6gy2wl"]
+[gd_scene load_steps=14 format=3 uid="uid://brxyh5c6gy2wl"]
 
 [ext_resource type="Script" uid="uid://cyt5hh1ayt4sl" path="res://Scripts/Main.cs" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://cri64e56cab4b" path="res://Scenes/Game/Paddle.tscn" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://dnwbvcj75m6jc" path="res://Scenes/Game/Ball.tscn" id="2_kln2b"]
 [ext_resource type="Texture2D" uid="uid://e655d3dm75k6" path="res://Assests/ui_asset/png/Untitled.png" id="4_c6dyv"]
 [ext_resource type="PackedScene" uid="uid://jappobsnchdm" path="res://Scenes/Menu/Pause.tscn" id="4_y4a8c"]
+[ext_resource type="Texture2D" uid="uid://5no4d7ctgiuv" path="res://Assests/break assets/Hearts/PNG/animated/border/heart_animated_1.png" id="6_5k2w5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
 size = Vector2(845, 150.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ushg2"]
+atlas = ExtResource("6_5k2w5")
+region = Rect2(0, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02r4d"]
+atlas = ExtResource("6_5k2w5")
+region = Rect2(17, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5og4"]
+atlas = ExtResource("6_5k2w5")
+region = Rect2(34, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol3yi"]
+atlas = ExtResource("6_5k2w5")
+region = Rect2(51, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6h6d"]
+atlas = ExtResource("6_5k2w5")
+region = Rect2(68, 0, 17, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cad5q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ushg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02r4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5og4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol3yi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6h6d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
@@ -54,3 +98,11 @@ offset_left = 436.0
 offset_top = 65.0
 offset_right = 436.0
 offset_bottom = 65.0
+
+[node name="Heart" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Heart"]
+position = Vector2(861, 478)
+sprite_frames = SubResource("SpriteFrames_cad5q")
+autoplay = "default"
+frame_progress = 0.4210564
