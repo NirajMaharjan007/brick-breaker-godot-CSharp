@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 namespace MyGame.Scripts;
@@ -12,7 +13,9 @@ public partial class Main : Node2D
 
     private Pause pause;
 
-    private RichTextLabel score;
+    private RichTextLabel scoreLabel;
+
+    private int totalScore = 0;
 
     private Node2D bricksContainer,
         pauseNode;
@@ -23,7 +26,7 @@ public partial class Main : Node2D
 
         ProcessMode = ProcessModeEnum.Always;
 
-        score = GetNode<Node2D>("Misc").GetNode<RichTextLabel>("RichTextLabel");
+        scoreLabel = GetNode<Node2D>("Misc").GetNode<RichTextLabel>("RichTextLabel");
 
         camera2D = GetNode<Camera2D>("Camera2D");
 
@@ -72,12 +75,20 @@ public partial class Main : Node2D
             for (int x = 0; x < col; x++)
             {
                 var brick = brickScene.Instantiate<Brick>();
+                brick.BrickDestroyed += OnBrickDestroyed;
                 brick.Position = new Vector2(x * brick.Width, y * brick.Height);
                 bricksContainer.AddChild(brick);
             }
         }
 
         // GetTree().Paused = true;
+    }
+
+    private void OnBrickDestroyed(int score)
+    {
+        totalScore += score;
+        scoreLabel.Text = $"Score: {totalScore}";
+        GD.Print($"Score updated → {totalScore}");
     }
 
     public override void _Process(double delta)

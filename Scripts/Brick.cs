@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace MyGame.Scripts;
 
 public partial class Brick : StaticBody2D
 {
+    [Signal]
+    public delegate void BrickDestroyedEventHandler(int score);
+
     private static class ResourcesPath
     {
         public const string BLACK = "res://Assests/break assets/bricks/sp_brick_black.png",
@@ -60,49 +64,26 @@ public partial class Brick : StaticBody2D
         Init();
     }
 
+    //For optimization purpose load textures only once
+    private static readonly Texture2D[] brickTextures =
+    [
+        GD.Load<Texture2D>(ResourcesPath.BLACK),
+        GD.Load<Texture2D>(ResourcesPath.WHITE),
+        GD.Load<Texture2D>(ResourcesPath.ORANGE),
+        GD.Load<Texture2D>(ResourcesPath.PINK),
+        GD.Load<Texture2D>(ResourcesPath.RED),
+        GD.Load<Texture2D>(ResourcesPath.GREEN),
+        GD.Load<Texture2D>(ResourcesPath.PURPLE),
+    ];
+
     private void Init()
     {
-        int value = GD.RandRange(1, 7);
-
+        //Optimize Version
         sprite = GetNode<Sprite2D>("Sprite2D");
+        int index = GD.RandRange(0, brickTextures.Length - 1);
+        sprite.Texture = brickTextures[index];
 
-        switch (value)
-        {
-            case 1:
-                var texture = GD.Load<Texture2D>(ResourcesPath.BLACK);
-                sprite.Texture = texture;
-                break;
-
-            case 2:
-                texture = GD.Load<Texture2D>(ResourcesPath.WHITE);
-                sprite.Texture = texture;
-                break;
-
-            case 3:
-                texture = GD.Load<Texture2D>(ResourcesPath.ORANGE);
-                sprite.Texture = texture;
-                break;
-
-            case 4:
-                texture = GD.Load<Texture2D>(ResourcesPath.PINK);
-                sprite.Texture = texture;
-                break;
-
-            case 5:
-                texture = GD.Load<Texture2D>(ResourcesPath.RED);
-                sprite.Texture = texture;
-                break;
-
-            case 6:
-                texture = GD.Load<Texture2D>(ResourcesPath.GREEN);
-                sprite.Texture = texture;
-                break;
-
-            case 7:
-                texture = GD.Load<Texture2D>(ResourcesPath.PURPLE);
-                sprite.Texture = texture;
-                break;
-        }
+        GD.Print($"Brick texture assigned: {sprite.Texture.ResourcePath}");
     }
 
     public void DisableBrickCompletely()
@@ -145,47 +126,32 @@ public partial class Brick : StaticBody2D
         //     GD.Print($"Stopping break sound {breakSound.Playing}");
         // }
 
-        if (body is Ball)
+        if (body is not Ball)
+            return;
+
+        var texturePath = sprite.Texture?.ResourcePath ?? string.Empty;
+
+        // Dictionary maps resource paths directly to scores
+        var scoreMap = new Dictionary<string, int>
         {
-            var texture = sprite.Texture;
-            GD.Print($"Texture: {texture.ResourcePath}");
-            switch (texture.ResourcePath)
-            {
-                case ResourcesPath.BLACK:
-                    GD.Print(IScore.BLACK);
-                    Score = IScore.BLACK;
-                    break;
+            { ResourcesPath.BLACK, IScore.BLACK },
+            { ResourcesPath.WHITE, IScore.WHITE },
+            { ResourcesPath.ORANGE, IScore.ORANGE },
+            { ResourcesPath.PINK, IScore.PINK },
+            { ResourcesPath.RED, IScore.RED },
+            { ResourcesPath.GREEN, IScore.GREEN },
+            { ResourcesPath.PURPLE, IScore.PURPLE },
+        };
 
-                case ResourcesPath.WHITE:
-                    GD.Print(IScore.WHITE);
-                    Score = IScore.WHITE;
-                    break;
-
-                case ResourcesPath.ORANGE:
-                    GD.Print(IScore.ORANGE);
-                    Score = IScore.ORANGE;
-                    break;
-
-                case ResourcesPath.PINK:
-                    GD.Print(IScore.PINK);
-                    Score = IScore.PINK;
-                    break;
-
-                case ResourcesPath.RED:
-                    GD.Print(IScore.RED);
-                    Score = IScore.RED;
-                    break;
-
-                case ResourcesPath.GREEN:
-                    GD.Print(IScore.GREEN);
-                    Score = IScore.GREEN;
-                    break;
-
-                case ResourcesPath.PURPLE:
-                    GD.Print(IScore.PURPLE);
-                    Score = IScore.PURPLE;
-                    break;
-            }
+        if (scoreMap.TryGetValue(texturePath, out int value))
+        {
+            Score = value;
+            EmitSignal(SignalName.BrickDestroyed, Score);
+            GD.Print($"Brick texture: {texturePath}, Score: {Score}");
+        }
+        else
+        {
+            GD.PrintErr($"⚠ Unknown texture path: {texturePath}");
         }
     }
 
