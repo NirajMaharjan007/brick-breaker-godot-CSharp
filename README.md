@@ -11,10 +11,13 @@ Break all the bricks, keep the ball alive, and aim for the highest score!
 
 - TODOS
   - Paddle movement with **keyboard only** ✅
-  - Ball physics with realistic bounces ✅
+    - Left and Right Key
+  - Ball physics with "realistic bounces" ✅
   - Multiple bricks ✅
-  - Score tracking ❌⌛
-  - Live Decrease if out of bound ⌛
+  - Score tracking ✅
+    - High Score varies (∵ Brick has Randomly Set)
+  - Live Decrease if out of bound ❌⌛
+    - TODO: FIXES
 
 ### Release Plan
 
