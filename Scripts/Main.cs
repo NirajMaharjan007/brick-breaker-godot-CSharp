@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 
@@ -18,7 +19,8 @@ public partial class Main : Node2D
     private int totalScore = 0;
 
     private Node2D bricksContainer,
-        pauseNode;
+        pauseNode,
+        misc;
 
     public override void _Ready()
     {
@@ -26,7 +28,9 @@ public partial class Main : Node2D
 
         ProcessMode = ProcessModeEnum.Always;
 
-        scoreLabel = GetNode<Node2D>("Misc").GetNode<RichTextLabel>("RichTextLabel");
+        misc = GetNode<Node2D>("Misc");
+
+        scoreLabel = misc.GetNode<RichTextLabel>("RichTextLabel");
 
         camera2D = GetNode<Camera2D>("Camera2D");
 
@@ -35,6 +39,8 @@ public partial class Main : Node2D
         ball = GetNode<Ball>("Ball");
 
         pauseNode = GetNode<Node2D>("Node2D");
+
+        bricksContainer = GetNode<Node2D>("BricksContainer");
 
         pause = pauseNode.GetNode<Pause>("Pause");
         pause.ResumePressed += () =>
@@ -47,8 +53,24 @@ public partial class Main : Node2D
             System.Environment.Exit(0);
         };
 
-        bricksContainer = GetNode<Node2D>("BricksContainer");
+        InitializedBricks();
+        // InitializedHeart();
+    }
 
+    private void InitializedHeart()
+    {
+        var heartContainer = misc.GetNode<Area2D>("Hearts");
+        var heartScene = GD.Load<PackedScene>("res://Scenes/Game/Heart.tscn");
+
+        var areaSize =
+            heartContainer.GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D;
+        float heartWidth = heartScene.Instantiate<Heart>().Width;
+        // int heartsCount = (int)(areaSize.Size.X / heartWidth);
+        GD.Print($"Hearts area size: {areaSize.Size}, Heart Width: {heartWidth}");
+    }
+
+    private void InitializedBricks()
+    {
         var shape =
             bricksContainer
                 .GetNode<Area2D>("Area2D")
@@ -80,8 +102,6 @@ public partial class Main : Node2D
                 bricksContainer.AddChild(brick);
             }
         }
-
-        // GetTree().Paused = true;
     }
 
     private void OnBrickDestroyed(int score)

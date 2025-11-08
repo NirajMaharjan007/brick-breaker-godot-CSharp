@@ -83,7 +83,7 @@ public partial class Brick : StaticBody2D
         int index = GD.RandRange(0, brickTextures.Length - 1);
         sprite.Texture = brickTextures[index];
 
-        GD.Print($"Brick texture assigned: {sprite.Texture.ResourcePath}");
+        // GD.Print($"Brick texture assigned: {sprite.Texture.ResourcePath}");
     }
 
     public void DisableBrickCompletely()
@@ -112,9 +112,9 @@ public partial class Brick : StaticBody2D
 
         if (body is Ball)
         {
-            GD.Print("Brick Hit by Ball");
+         //   GD.Print("Brick Hit by Ball");
             PlayBreakSound();
-            GD.Print($"Playing break sound {breakSound.Playing}");
+         //   GD.Print($"Playing break sound {breakSound.Playing}");
         }
     }
 
@@ -147,7 +147,7 @@ public partial class Brick : StaticBody2D
         {
             Score = value;
             EmitSignal(SignalName.BrickDestroyed, Score);
-            GD.Print($"Brick texture: {texturePath}, Score: {Score}");
+            //  GD.Print($"Brick texture: {texturePath}, Score: {Score}");
         }
         else
         {

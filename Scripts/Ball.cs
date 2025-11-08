@@ -42,7 +42,7 @@ public partial class Ball : RigidBody2D
         };
 
         sprite.Texture = GD.Load<Texture2D>(path);
-        GD.Print($"BALL TEXTURE {sprite.Texture.ResourcePath} Value {value}");
+       // GD.Print($"BALL TEXTURE {sprite.Texture.ResourcePath} Value {value}");
 
         area2D = GetNode<Area2D>("Area2D");
         area2D.BodyEntered += OnBodyEntered;
