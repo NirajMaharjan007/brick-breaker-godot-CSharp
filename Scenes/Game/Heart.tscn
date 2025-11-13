@@ -43,16 +43,13 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 6.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6aobm"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_x8io2")
-autoplay = "default"
-frame = 4
-frame_progress = 0.97701705
 script = ExtResource("2_6aobm")
 
 [node name="Area2D" type="Area2D" parent="."]

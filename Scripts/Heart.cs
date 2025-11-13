@@ -10,10 +10,16 @@ public partial class Heart : AnimatedSprite2D
     public override void _Ready()
     {
         base._Ready();
+
         var area = GetNode<Area2D>("Area2D");
         var shape = area.GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D;
         width = shape?.Size.X ?? 0f;
         height = shape?.Size.Y ?? 0f;
+    }
+
+    public void Hurt()
+    {
+        Play("default");
     }
 
     public float Width => width;

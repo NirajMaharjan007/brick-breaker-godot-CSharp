@@ -12,6 +12,8 @@ public partial class Main : Node2D
 
     private Ball ball;
 
+    private Heart heart;
+
     private Pause pause;
 
     private RichTextLabel scoreLabel;
@@ -29,6 +31,9 @@ public partial class Main : Node2D
         ProcessMode = ProcessModeEnum.Always;
 
         misc = GetNode<Node2D>("Misc");
+
+        var heartContainer = misc.GetNode<Node2D>("Hearts");
+        heart = heartContainer.GetNode<Heart>("Heart3");
 
         scoreLabel = misc.GetNode<RichTextLabel>("RichTextLabel");
 
@@ -122,6 +127,11 @@ public partial class Main : Node2D
         if (bricksContainer.GetChildCount() <= 1)
         {
             GD.Print("Level Complete!");
+        }
+
+        if (ball.IsOutside)
+        {
+            heart.Hurt();
         }
 
         // GetTree().Paused = pause.IsPaused;
