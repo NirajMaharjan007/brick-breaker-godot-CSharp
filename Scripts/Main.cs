@@ -34,9 +34,10 @@ public partial class Main : Node2D
 
         camera2D = GetNode<Camera2D>("Camera2D");
 
-        paddle = GetNode<Paddle>("Paddle");
-
         ball = GetNode<Ball>("Ball");
+
+        paddle = GetNode<Paddle>("Paddle");
+        paddle.BallEntity = ball;
 
         pauseNode = GetNode<Node2D>("Node2D");
 

@@ -42,7 +42,7 @@ public partial class Ball : RigidBody2D
         };
 
         sprite.Texture = GD.Load<Texture2D>(path);
-       // GD.Print($"BALL TEXTURE {sprite.Texture.ResourcePath} Value {value}");
+        // GD.Print($"BALL TEXTURE {sprite.Texture.ResourcePath} Value {value}");
 
         area2D = GetNode<Area2D>("Area2D");
         area2D.BodyEntered += OnBodyEntered;
@@ -63,9 +63,34 @@ public partial class Ball : RigidBody2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+        GD.Print($"BALLS LINER VELO-> {LinearVelocity} is outside: {IsOutside}");
 
         if (!LinearVelocity.IsZeroApprox())
             LinearVelocity = LinearVelocity.Normalized() * SPEED;
+
+        if (IsOutside)
+        {
+            LinearVelocity = new Vector2(0, 0);
+            try
+            {
+                if (Entity is not null)
+                {
+                    Position = new Vector2(Entity.Position.X, Entity.Position.Y - 16);
+                }
+                else
+                {
+                    throw new System.NullReferenceException("Entity Paddle is null");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Position = new Vector2(400, 284);
+                GD.PushError("Resetting ball to center at (400,284) " + ex);
+                GD.PrintErr(
+                    "Entity Paddle is null, resetting ball to center exception: " + ex.ToString()
+                );
+            }
+        }
         else if (LinearVelocity.IsZeroApprox())
         {
             LinearVelocity = new Vector2(0, SPEED);
@@ -110,24 +135,6 @@ public partial class Ball : RigidBody2D
         else if (pos.Y >= bottom)
         {
             IsOutside = true;
-
-            try
-            {
-                if (Entity is not null)
-                {
-                    pos = new Vector2(Entity.Position.X, Entity.Position.Y - 20);
-                }
-                else
-                {
-                    throw new("Error Paddle Entity");
-                }
-            }
-            catch (System.Exception e)
-            {
-                pos = new Vector2(170.0f, 250.0f);
-                GD.PushError(e);
-                GD.PrintErr($"Error -> {e.ToString()}");
-            }
         }
 
         Position = pos;

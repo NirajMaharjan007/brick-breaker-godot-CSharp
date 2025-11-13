@@ -6,6 +6,8 @@ public partial class Paddle : StaticBody2D
 {
     private const int SPEED = 320;
 
+    public Ball BallEntity { get; set; }
+
     private AnimatedSprite2D animated;
     public float Width =>
         (GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D).Size.X;
@@ -18,6 +20,10 @@ public partial class Paddle : StaticBody2D
     public override void _Ready()
     {
         base._Ready();
+
+        if (BallEntity is null)
+            // System.Environment.Exit(1);
+            GD.PrintErr("BALL ENTITY IS NULL");
 
         // GD.Print($"WIDTH -> {Width}");
         animated = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -57,6 +63,15 @@ public partial class Paddle : StaticBody2D
         if (Input.IsActionJustReleased("ui_left") || Input.IsActionJustReleased("ui_right"))
         {
             animated.Pause();
+        }
+
+        if (Input.IsActionJustPressed("ui_up"))
+        {
+            if (BallEntity.LinearVelocity.IsZeroApprox() && BallEntity.IsOutside)
+            {
+                BallEntity.IsOutside = false;
+                BallEntity.LinearVelocity = new Vector2(0, -BallEntity.LinearVelocity.Y);
+            }
         }
 
         Position += velocity.Normalized() * SPEED * (float)delta;
