@@ -5,18 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://dnwbvcj75m6jc" path="res://Scenes/Game/Ball.tscn" id="2_kln2b"]
 [ext_resource type="Texture2D" uid="uid://e655d3dm75k6" path="res://Assests/ui_asset/png/Untitled.png" id="4_c6dyv"]
 [ext_resource type="PackedScene" uid="uid://jappobsnchdm" path="res://Scenes/Menu/Pause.tscn" id="4_y4a8c"]
+[ext_resource type="PackedScene" uid="uid://rl6x7jy1rxou" path="res://Scenes/Game/Heart.tscn" id="6_5k2w5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
 size = Vector2(845, 150.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6dyv"]
-size = Vector2(99, 39)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r150o")
 
 [node name="Ball" parent="." instance=ExtResource("2_kln2b")]
-position = Vector2(66, 250)
+position = Vector2(52, 427)
 
 [node name="Paddle" parent="." instance=ExtResource("2_idj7w")]
 position = Vector2(53, 448)
@@ -70,9 +68,13 @@ text = "Score: 0"
 fit_content = true
 vertical_alignment = 1
 
-[node name="Hearts" type="Area2D" parent="Misc"]
+[node name="Hearts" type="Node2D" parent="Misc"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Misc/Hearts"]
-position = Vector2(822.5, 471.5)
-shape = SubResource("RectangleShape2D_c6dyv")
-debug_color = Color(0.9647059, 0, 0.48235294, 0.19607843)
+[node name="Heart1" parent="Misc/Hearts" instance=ExtResource("6_5k2w5")]
+position = Vector2(821.5, 479.5)
+
+[node name="Heart2" parent="Misc/Hearts" instance=ExtResource("6_5k2w5")]
+position = Vector2(841.5, 479.5)
+
+[node name="Heart3" parent="Misc/Hearts" instance=ExtResource("6_5k2w5")]
+position = Vector2(861.5, 479.5)
