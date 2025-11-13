@@ -112,9 +112,9 @@ public partial class Brick : StaticBody2D
 
         if (body is Ball)
         {
-         //   GD.Print("Brick Hit by Ball");
+            //   GD.Print("Brick Hit by Ball");
             PlayBreakSound();
-         //   GD.Print($"Playing break sound {breakSound.Playing}");
+            //   GD.Print($"Playing break sound {breakSound.Playing}");
         }
     }
 
@@ -157,12 +157,33 @@ public partial class Brick : StaticBody2D
 
     private void PlayBreakSound()
     {
-        if (breakSound.Playing)
-            breakSound.Stop();
+        // if (breakSound.Playing)
+        //     breakSound.Stop();
 
-        breakSound.PitchScale = (float)GD.RandRange(0.95f, 1.05f); // Subtle variation
-        breakSound.VolumeDb = (float)GD.RandRange(-5.0f, 0.0f); // Slight volume variation
-        breakSound.Play();
+        // breakSound.PitchScale = (float)GD.RandRange(0.95f, 1.05f); // Subtle variation
+        // breakSound.VolumeDb = (float)GD.RandRange(-5.0f, 0.0f); // Slight volume variation
+        // breakSound.Play();
+
+        // Avoid restarting the same sound if it's already playing recently
+        if (!breakSound.Playing)
+        {
+            // Add slight pitch and volume variation for natural feel
+            breakSound.PitchScale = (float)GD.RandRange(0.97f, 1.03f);
+            breakSound.VolumeDb = (float)GD.RandRange(-2.0f, 0.0f);
+
+            breakSound.Play();
+        }
+        else
+        {
+            // If sound is already playing, clone it for overlapping effect
+            var clone = breakSound.Duplicate() as AudioStreamPlayer2D;
+            clone.PitchScale = (float)GD.RandRange(0.97f, 1.03f);
+            clone.VolumeDb = (float)GD.RandRange(-2.0f, 0.0f);
+            GetParent().AddChild(clone);
+
+            clone.Finished += () => clone.QueueFree();
+            clone.Play();
+        }
     }
 
     public override void _ExitTree()

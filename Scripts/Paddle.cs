@@ -67,11 +67,9 @@ public partial class Paddle : StaticBody2D
 
         if (Input.IsActionJustPressed("ui_up"))
         {
-            if (BallEntity.LinearVelocity.IsZeroApprox() && BallEntity.IsOutside)
-            {
-                BallEntity.IsOutside = false;
-                BallEntity.LinearVelocity = new Vector2(0, -BallEntity.LinearVelocity.Y);
-            }
+            BallEntity.IsOutside = false;
+            BallEntity.LinearVelocity += new Vector2(0, -300);
+            BallEntity.ApplyCentralImpulse(new Vector2(0, -50));
         }
 
         Position += velocity.Normalized() * SPEED * (float)delta;

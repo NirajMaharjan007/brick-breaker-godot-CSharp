@@ -17,11 +17,6 @@ public partial class Heart : AnimatedSprite2D
         height = shape?.Size.Y ?? 0f;
     }
 
-    public void Hurt()
-    {
-        Play("default");
-    }
-
     public float Width => width;
     public float Height => height;
 }

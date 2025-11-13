@@ -61,7 +61,7 @@ offset_bottom = 65.0
 [node name="RichTextLabel" type="RichTextLabel" parent="Misc"]
 offset_left = 10.0
 offset_top = 459.0
-offset_right = 95.0
+offset_right = 293.0
 offset_bottom = 493.0
 size_flags_horizontal = 3
 text = "Score: 0"
@@ -71,10 +71,10 @@ vertical_alignment = 1
 [node name="Hearts" type="Node2D" parent="Misc"]
 
 [node name="Heart1" parent="Misc/Hearts" instance=ExtResource("6_5k2w5")]
-position = Vector2(821.5, 479.5)
+position = Vector2(823.5, 479.5)
 
 [node name="Heart2" parent="Misc/Hearts" instance=ExtResource("6_5k2w5")]
 position = Vector2(841.5, 479.5)
 
 [node name="Heart3" parent="Misc/Hearts" instance=ExtResource("6_5k2w5")]
-position = Vector2(861.5, 479.5)
+position = Vector2(859.5, 479.5)

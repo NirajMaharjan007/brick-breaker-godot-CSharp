@@ -1,35 +1,48 @@
 [gd_scene load_steps=10 format=3 uid="uid://rl6x7jy1rxou"]
 
-[ext_resource type="Texture2D" uid="uid://cabkscuw31fwr" path="res://Assests/break assets/Hearts/PNG/animated/border/heart_animated_2.png" id="1_161er"]
+[ext_resource type="Texture2D" uid="uid://5no4d7ctgiuv" path="res://Assests/break assets/Hearts/PNG/animated/border/heart_animated_1.png" id="1_6aobm"]
 [ext_resource type="Script" uid="uid://g6vojo7wvdyl" path="res://Scripts/Heart.cs" id="2_6aobm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6aobm"]
-atlas = ExtResource("1_161er")
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbxh8"]
+atlas = ExtResource("1_6aobm")
 region = Rect2(0, 0, 17, 17)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jbxh8"]
-atlas = ExtResource("1_161er")
-region = Rect2(17, 0, 17, 17)
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8io2"]
+atlas = ExtResource("1_6aobm")
+region = Rect2(68, 0, 17, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6onh"]
-atlas = ExtResource("1_161er")
-region = Rect2(34, 0, 17, 17)
+atlas = ExtResource("1_6aobm")
+region = Rect2(17, 0, 17, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hs6y4"]
-atlas = ExtResource("1_161er")
-region = Rect2(51, 0, 17, 17)
+atlas = ExtResource("1_6aobm")
+region = Rect2(34, 0, 17, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ix7y"]
-atlas = ExtResource("1_161er")
-region = Rect2(68, 0, 17, 17)
+atlas = ExtResource("1_6aobm")
+region = Rect2(51, 0, 17, 17)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x8io2"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6aobm")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_jbxh8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
 }, {
-"duration": 1.0,
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_x8io2")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_jbxh8")
 }, {
 "duration": 1.0,
@@ -40,16 +53,22 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5ix7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8io2")
 }],
-"loop": true,
-"name": &"default",
-"speed": 8.0
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6aobm"]
+size = Vector2(18, 18)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_x8io2")
+animation = &"hurt"
+autoplay = "default"
 script = ExtResource("2_6aobm")
 
 [node name="Area2D" type="Area2D" parent="."]

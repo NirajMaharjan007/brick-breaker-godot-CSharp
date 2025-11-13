@@ -63,7 +63,7 @@ public partial class Ball : RigidBody2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        GD.Print($"BALLS LINER VELO-> {LinearVelocity} is outside: {IsOutside}");
+        // GD.Print($"BALLS LINER VELO-> {LinearVelocity} is outside: {IsOutside}");
 
         if (!LinearVelocity.IsZeroApprox())
             LinearVelocity = LinearVelocity.Normalized() * SPEED;

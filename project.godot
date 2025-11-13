@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MyGame"
-run/main_scene="uid://c84s04wdgtxkc"
+run/main_scene="uid://brxyh5c6gy2wl"
 config/features=PackedStringArray("4.5", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -121,6 +121,8 @@ public partial class Main : Node2D
     {
         // TODO: LEVEL CHANGE LOGIC
 
+        GD.Print(heart.SpriteFrames.GetFrameCount("hurt"));
+
         base._Process(delta);
 
         // GD.Print($"Bricks left: {bricksContainer.GetChildCount() - 1}");
@@ -131,7 +133,15 @@ public partial class Main : Node2D
 
         if (ball.IsOutside)
         {
-            heart.Hurt();
+            if (heart.Frame >= 5)
+            {
+                heart.Pause();
+                GD.Print("Pause");
+            }
+            else
+            {
+                heart.Play("hurt");
+            }
         }
 
         // GetTree().Paused = pause.IsPaused;
