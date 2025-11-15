@@ -44,3 +44,4 @@ Break all the bricks, keep the ball alive, and aim for the highest score!
 
 - [Game Assets I](https://itch.io/) **ITCH.IO**
 - [Game Assets II](https://craftpix.net/) **Craftpix.net**
+- [Sound Effects](https://pixabay.com/sound-effects/) **Pixabay.com**
