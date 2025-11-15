@@ -24,6 +24,9 @@ public partial class Main : Node2D
         pauseNode,
         misc;
 
+    private bool wasOutside = false,
+        hasTriggered = false;
+
     public override void _Ready()
     {
         base._Ready();
@@ -121,30 +124,21 @@ public partial class Main : Node2D
     {
         // TODO: LEVEL CHANGE LOGIC
 
-        GD.Print(heart.SpriteFrames.GetFrameCount("hurt"));
-
         base._Process(delta);
 
-        // GD.Print($"Bricks left: {bricksContainer.GetChildCount() - 1}");
+        GD.Print($"Flag: {ball.IsOutside}, WasOutside: {wasOutside}, HasTriggered: {hasTriggered}");
         if (bricksContainer.GetChildCount() <= 1)
         {
             GD.Print("Level Complete!");
         }
 
-        if (ball.IsOutside)
+        if (ball.IsOutside && !wasOutside && !hasTriggered)
         {
-            if (heart.Frame >= 5)
-            {
-                heart.Pause();
-                GD.Print("Pause");
-            }
-            else
-            {
-                heart.Play("hurt");
-            }
+            heart.Hurt(); // runs exactly once ever
+            hasTriggered = true;
         }
 
-        // GetTree().Paused = pause.IsPaused;
+        wasOutside = ball.IsOutside;
 
         if (GetTree().Paused)
         {
