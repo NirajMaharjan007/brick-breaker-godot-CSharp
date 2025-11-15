@@ -12,7 +12,9 @@ public partial class Loading : Node
     public override void _Ready()
     {
         base._Ready();
-       // GD.Print("Loading...");
+        GetWindow().Mode = Window.ModeEnum.Windowed;
+        GetWindow().SetFlag(Window.Flags.ResizeDisabled, true);
+        // GD.Print("Loading...");
 
         container = GetNode<VBoxContainer>("VBoxContainer");
         progressBar = container.GetNode<ProgressBar>("ProgressBar");
@@ -29,8 +31,8 @@ public partial class Loading : Node
             (float)(100 * delta) // speed of fill
         );
 
-       // GD.Print($"Progress: {progressBar.Value}/{progressBar.MaxValue}");
-      //  GD.Print($"Target: {targetValue}");
+        // GD.Print($"Progress: {progressBar.Value}/{progressBar.MaxValue}");
+        //  GD.Print($"Target: {targetValue}");
 
         if (progressBar.Value >= progressBar.MaxValue)
         {

@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://w62cmi84bx1f"]
+
+[ext_resource type="Script" uid="uid://8bomkm28po7e" path="res://Scripts/GameOver.cs" id="1_lr7ix"]
+[ext_resource type="Texture2D" uid="uid://o4tp1s0rjip5" path="res://Assests/ui_asset/png/MainMenuButton/Default.png" id="2_m1g37"]
+[ext_resource type="Texture2D" uid="uid://dft1f3f7scap0" path="res://Assests/ui_asset/png/MainMenuButton/Hover.png" id="3_asqm5"]
+[ext_resource type="Texture2D" uid="uid://lpkw7whhb67m" path="res://Assests/ui_asset/png/ExitButton/Default.png" id="4_bsvba"]
+[ext_resource type="Texture2D" uid="uid://dswfdh80q6sv3" path="res://Assests/ui_asset/png/ExitButton/Hover.png" id="5_ns5p6"]
+[ext_resource type="AudioStream" uid="uid://qwesywdxklvt" path="res://Assests/sound/game-over-deep-male-voice-clip-352695.wav" id="6_asqm5"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lr7ix")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="GameOver" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/shadow_outline_size = 3
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/normal_font_size = 28
+text = "Game Over"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScore" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 24
+text = "High Score: 0"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MainMenu" type="TextureButton" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("2_m1g37")
+texture_hover = ExtResource("3_asqm5")
+
+[node name="Exit" type="TextureButton" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_bsvba")
+texture_hover = ExtResource("5_ns5p6")
+
+[node name="Voice" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_asqm5")
+volume_db = 1.24

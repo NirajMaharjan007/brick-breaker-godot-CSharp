@@ -10,6 +10,11 @@ public partial class Menu : Control
 
     public override void _Ready()
     {
+        base._Ready();
+
+        GetWindow().Mode = Window.ModeEnum.Windowed;
+        GetWindow().SetFlag(Window.Flags.ResizeDisabled, true);
+
         container = GetNode<VBoxContainer>("VBoxContainer");
 
         var buttonContainer = container.GetNode<VBoxContainer>("ButtonContainer");

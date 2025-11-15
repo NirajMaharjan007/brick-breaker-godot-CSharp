@@ -18,20 +18,25 @@ public partial class Main : Node2D
 
     private RichTextLabel scoreLabel;
 
+    private GameOver gameOver;
     private int totalScore = 0,
         lives = 3;
 
     private Node2D bricksContainer,
         pauseNode,
-        misc;
+        misc,
+        gameOverNode;
 
-    private bool wasOutside = false;
+    private bool wasOutside = false,
+        isGameOver = false;
 
     public override void _Ready()
     {
         base._Ready();
 
         ProcessMode = ProcessModeEnum.Always;
+        GetWindow().Mode = Window.ModeEnum.Windowed;
+        GetWindow().SetFlag(Window.Flags.ResizeDisabled, true);
 
         misc = GetNode<Node2D>("Misc");
 
@@ -49,6 +54,10 @@ public partial class Main : Node2D
 
         pauseNode = GetNode<Node2D>("Node2D");
 
+        gameOverNode = GetNode<Node2D>("GameOver");
+
+        gameOver = gameOverNode.GetNode<GameOver>("GameOver");
+
         bricksContainer = GetNode<Node2D>("BricksContainer");
 
         pause = pauseNode.GetNode<Pause>("Pause");
@@ -64,18 +73,6 @@ public partial class Main : Node2D
 
         InitializedBricks();
         // InitializedHeart();
-    }
-
-    private void InitializedHeart()
-    {
-        var heartContainer = misc.GetNode<Area2D>("Hearts");
-        var heartScene = GD.Load<PackedScene>("res://Scenes/Game/Heart.tscn");
-
-        var areaSize =
-            heartContainer.GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D;
-        float heartWidth = heartScene.Instantiate<Heart>().Width;
-        // int heartsCount = (int)(areaSize.Size.X / heartWidth);
-        GD.Print($"Hearts area size: {areaSize.Size}, Heart Width: {heartWidth}");
     }
 
     private void InitializedBricks()
@@ -122,11 +119,9 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
-        // TODO: LEVEL CHANGE LOGIC
-
         base._Process(delta);
 
-        GD.Print($"Flag: {ball.IsOutside}, WasOutside: {wasOutside}, Lives: {lives}");
+        // GD.Print($"Flag: {ball.IsOutside}, WasOutside: {wasOutside}, Lives: {lives}");
         if (bricksContainer.GetChildCount() <= 1)
         {
             GD.Print("Level Complete!");
@@ -140,7 +135,17 @@ public partial class Main : Node2D
 
         wasOutside = ball.IsOutside;
 
-        if (GetTree().Paused)
+        isGameOver = lives <= 0;
+        if (isGameOver)
+        {
+            GD.Print("Game Over!");
+            GetTree().Paused = true;
+
+            gameOverNode.Visible = true;
+            gameOver.FinalScore = totalScore;
+        }
+
+        if (GetTree().Paused && !isGameOver)
         {
             paddle.MoveIt = false;
             pauseNode.Visible = true;

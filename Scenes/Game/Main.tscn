@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://brxyh5c6gy2wl"]
+[gd_scene load_steps=9 format=3 uid="uid://brxyh5c6gy2wl"]
 
 [ext_resource type="Script" uid="uid://cyt5hh1ayt4sl" path="res://Scripts/Main.cs" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://cri64e56cab4b" path="res://Scenes/Game/Paddle.tscn" id="2_idj7w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://e655d3dm75k6" path="res://Assests/ui_asset/png/Untitled.png" id="4_c6dyv"]
 [ext_resource type="PackedScene" uid="uid://jappobsnchdm" path="res://Scenes/Menu/Pause.tscn" id="4_y4a8c"]
 [ext_resource type="PackedScene" uid="uid://rl6x7jy1rxou" path="res://Scenes/Game/Heart.tscn" id="6_5k2w5"]
+[ext_resource type="PackedScene" uid="uid://w62cmi84bx1f" path="res://Scenes/Menu/GameOver.tscn" id="6_ushg2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
 size = Vector2(845, 150.5)
@@ -55,6 +56,23 @@ offset_left = 436.0
 offset_top = 65.0
 offset_right = 436.0
 offset_bottom = 65.0
+
+[node name="GameOver" type="Node2D" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="GameOver"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_c6dyv")
+stretch_mode = 2
+
+[node name="GameOver" parent="GameOver" instance=ExtResource("6_ushg2")]
+offset_left = 442.0
+offset_top = 225.0
+offset_right = 442.0
+offset_bottom = 225.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Misc" type="Node2D" parent="."]
 
