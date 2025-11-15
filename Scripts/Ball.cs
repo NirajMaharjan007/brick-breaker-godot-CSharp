@@ -135,6 +135,7 @@ public partial class Ball : RigidBody2D
         else if (pos.Y >= bottom)
         {
             IsOutside = true;
+            Entity?.ResetBoost();
         }
 
         Position = pos;

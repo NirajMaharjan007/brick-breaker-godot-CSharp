@@ -15,7 +15,10 @@ public partial class Paddle : StaticBody2D
     public float Height =>
         (GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D).Size.Y;
 
+    private bool boostUsed = false;
     public bool MoveIt { get; set; } = true;
+
+    public void ResetBoost() => boostUsed = false;
 
     public override void _Ready()
     {
@@ -65,11 +68,12 @@ public partial class Paddle : StaticBody2D
             animated.Pause();
         }
 
-        if (Input.IsActionJustPressed("ui_up"))
+        if (Input.IsActionJustPressed("ui_up") && BallEntity is not null && !boostUsed)
         {
             BallEntity.IsOutside = false;
             BallEntity.LinearVelocity += new Vector2(0, -300);
             BallEntity.ApplyCentralImpulse(new Vector2(0, -50));
+            boostUsed = true;
         }
 
         Position += velocity.Normalized() * SPEED * (float)delta;

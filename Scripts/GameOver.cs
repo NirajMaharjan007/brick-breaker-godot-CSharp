@@ -15,6 +15,8 @@ public partial class GameOver : Control
     {
         base._Ready();
 
+        ProcessMode = Node.ProcessModeEnum.Always;
+
         var vbox = GetNode<VBoxContainer>("VBoxContainer");
         var buttonsBox = vbox.GetNode<VBoxContainer>("Buttons");
 
@@ -34,6 +36,12 @@ public partial class GameOver : Control
     {
         base._Process(delta);
         finalScoreLabel.Text = $"Final Score: {FinalScore}";
+    }
+
+    public void PlayGameOverSound()
+    {
+        GD.Print("Playing Game Over Sound...");
+        gameOverSound.Play();
     }
 
     private void OnMenuPressed()

@@ -138,17 +138,14 @@ public partial class Main : Node2D
         isGameOver = lives <= 0;
         if (isGameOver)
         {
-            GD.Print("Game Over!");
-            GetTree().Paused = true;
-
-            gameOverNode.Visible = true;
-            gameOver.FinalScore = totalScore;
+            gameOver.PlayGameOverSound();
+            CallDeferred(nameof(FinishGameOver));
         }
 
-        if (GetTree().Paused && !isGameOver)
+        if (GetTree().Paused || isGameOver)
         {
             paddle.MoveIt = false;
-            pauseNode.Visible = true;
+            pauseNode.Visible = !isGameOver;
         }
         else
         {
@@ -162,6 +159,13 @@ public partial class Main : Node2D
         base._PhysicsProcess(delta);
         paddle.CheckWall(camera2D);
         ball.CheckWall(camera2D);
+    }
+
+    private void FinishGameOver()
+    {
+        gameOverNode.Visible = true;
+        gameOver.FinalScore = totalScore;
+        GetTree().Paused = true;
     }
 
     private void TogglePause()
