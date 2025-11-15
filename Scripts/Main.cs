@@ -12,20 +12,20 @@ public partial class Main : Node2D
 
     private Ball ball;
 
-    private Heart heart;
+    private Heart[] hearts;
 
     private Pause pause;
 
     private RichTextLabel scoreLabel;
 
-    private int totalScore = 0;
+    private int totalScore = 0,
+        lives = 3;
 
     private Node2D bricksContainer,
         pauseNode,
         misc;
 
-    private bool wasOutside = false,
-        hasTriggered = false;
+    private bool wasOutside = false;
 
     public override void _Ready()
     {
@@ -35,8 +35,8 @@ public partial class Main : Node2D
 
         misc = GetNode<Node2D>("Misc");
 
-        var heartContainer = misc.GetNode<Node2D>("Hearts");
-        heart = heartContainer.GetNode<Heart>("Heart3");
+        var heartContainer = misc.GetNode<Node>("Hearts");
+        hearts = [.. heartContainer.GetChildren().OfType<Heart>()];
 
         scoreLabel = misc.GetNode<RichTextLabel>("RichTextLabel");
 
@@ -126,16 +126,16 @@ public partial class Main : Node2D
 
         base._Process(delta);
 
-        GD.Print($"Flag: {ball.IsOutside}, WasOutside: {wasOutside}, HasTriggered: {hasTriggered}");
+        GD.Print($"Flag: {ball.IsOutside}, WasOutside: {wasOutside}, Lives: {lives}");
         if (bricksContainer.GetChildCount() <= 1)
         {
             GD.Print("Level Complete!");
         }
 
-        if (ball.IsOutside && !wasOutside && !hasTriggered)
+        if (ball.IsOutside && !wasOutside && lives > 0)
         {
-            heart.Hurt(); // runs exactly once ever
-            hasTriggered = true;
+            lives--;
+            hearts[lives].Hurt(); // runs exactly once ever
         }
 
         wasOutside = ball.IsOutside;

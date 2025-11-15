@@ -8,6 +8,9 @@ public partial class Heart : AnimatedSprite2D
     private float width;
     private float height;
 
+    public bool IsEmpty => Animation.Equals("empty");
+    public bool IsFull => Animation.Equals("default");
+
     public override void _Ready()
     {
         base._Ready();
