@@ -4,7 +4,6 @@ namespace MyGame.Scripts;
 
 public partial class GameOver : Control
 {
-    private AudioStreamPlayer2D gameOverSound;
     private RichTextLabel finalScoreLabel;
     private TextureButton menu,
         exit;
@@ -23,8 +22,6 @@ public partial class GameOver : Control
         finalScoreLabel = vbox.GetNode<RichTextLabel>("HighScore");
         finalScoreLabel.Text = $"High Score: {FinalScore}";
 
-        gameOverSound = GetNode<AudioStreamPlayer2D>("Voice");
-
         menu = buttonsBox.GetNode<TextureButton>("MainMenu");
         menu.Pressed += OnMenuPressed;
 
@@ -36,12 +33,6 @@ public partial class GameOver : Control
     {
         base._Process(delta);
         finalScoreLabel.Text = $"Final Score: {FinalScore}";
-    }
-
-    public void PlayGameOverSound()
-    {
-        GD.Print("Playing Game Over Sound...");
-        gameOverSound.Play();
     }
 
     private void OnMenuPressed()

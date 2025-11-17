@@ -19,6 +19,8 @@ public partial class Main : Node2D
     private RichTextLabel scoreLabel;
 
     private GameOver gameOver;
+
+    private AudioStreamPlayer2D gameOverSound;
     private int totalScore = 0,
         lives = 3;
 
@@ -28,7 +30,8 @@ public partial class Main : Node2D
         gameOverNode;
 
     private bool wasOutside = false,
-        isGameOver = false;
+        isGameOver = false,
+        gameOverTriggered = false;
 
     public override void _Ready()
     {
@@ -55,7 +58,7 @@ public partial class Main : Node2D
         pauseNode = GetNode<Node2D>("Node2D");
 
         gameOverNode = GetNode<Node2D>("GameOver");
-
+        gameOverSound = gameOverNode.GetNode<AudioStreamPlayer2D>("Voice");
         gameOver = gameOverNode.GetNode<GameOver>("GameOver");
 
         bricksContainer = GetNode<Node2D>("BricksContainer");
@@ -136,9 +139,14 @@ public partial class Main : Node2D
         wasOutside = ball.IsOutside;
 
         isGameOver = lives <= 0;
-        if (isGameOver)
+        if (isGameOver && !gameOverTriggered)
         {
-            gameOver.PlayGameOverSound();
+            gameOverTriggered = true; // prevents spam
+
+            gameOverSound.ProcessMode = ProcessModeEnum.Always;
+            gameOverSound.Play();
+            gameOverSound.Finished += gameOverSound.QueueFree;
+
             CallDeferred(nameof(FinishGameOver));
         }
 
