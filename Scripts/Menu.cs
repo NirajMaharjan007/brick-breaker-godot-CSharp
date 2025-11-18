@@ -4,6 +4,9 @@ namespace MyGame.Scripts;
 
 public partial class Menu : Control
 {
+    [Signal]
+    public delegate void StartGameEventHandler();
+
     private VBoxContainer container;
     private TextureButton startButton;
     private TextureButton exitButton;
@@ -28,7 +31,8 @@ public partial class Menu : Control
 
     private void OnStartButtonPressed()
     {
-        var mainScene = GD.Load<PackedScene>("res://Scenes/Menu/Loading.tscn");
+        EmitSignal(SignalName.StartGame);
+        /* var mainScene = GD.Load<PackedScene>("res://Scenes/Menu/Loading.tscn");
         if (mainScene == null)
         {
             GD.PrintErr("Failed to load 'Loading' scene.");
@@ -43,11 +47,7 @@ public partial class Menu : Control
         }
 
         GetTree().Root.AddChild(mainNode);
-        QueueFree();
-
-        // var label = container.GetNode<Label>("Label");
-        // label.Text = "Start Button Pressed!";
-        // GD.Print("Start Button Pressed!");
+        QueueFree(); */
     }
 
     private void OnExitButtonPressed()
@@ -61,7 +61,7 @@ public partial class Menu : Control
         {
             GD.PushError(e);
             GD.PrintErr($"Error Exiting Game {e.Message}");
-            System.Environment.Exit(-1);
+            System.Environment.Exit(1);
         }
     }
 
@@ -69,34 +69,10 @@ public partial class Menu : Control
     {
         base._ExitTree();
 
-        if (this is not null)
-        {
-            try
-            {
-                if (startButton is not null)
-                {
-                    startButton.Pressed -= OnStartButtonPressed;
-                    startButton.Dispose();
-                }
+        if (startButton is not null)
+            startButton.Pressed -= OnStartButtonPressed;
 
-                if (exitButton is not null)
-                {
-                    exitButton.Pressed -= OnExitButtonPressed;
-                    exitButton.Dispose();
-                }
-
-                container?.Dispose();
-            }
-            catch (System.Exception e)
-            {
-                GD.PrintErr($"Error -> {e.ToString()}");
-                System.Environment.Exit(-1);
-            }
-            finally
-            {
-                Visible = false;
-                Dispose();
-            }
-        }
+        if (exitButton is not null)
+            exitButton.Pressed -= OnExitButtonPressed;
     }
 }

@@ -14,7 +14,7 @@ public partial class GameOver : Control
     {
         base._Ready();
 
-        ProcessMode = Node.ProcessModeEnum.Always;
+        ProcessMode = ProcessModeEnum.Always;
 
         var vbox = GetNode<VBoxContainer>("VBoxContainer");
         var buttonsBox = vbox.GetNode<VBoxContainer>("Buttons");

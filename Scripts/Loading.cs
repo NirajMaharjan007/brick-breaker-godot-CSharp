@@ -4,10 +4,14 @@ namespace MyGame.Scripts;
 
 public partial class Loading : Node
 {
+    [Signal]
+    public delegate void LoadingCompleteEventHandler();
     private VBoxContainer container;
     private ProgressBar progressBar;
 
     private double targetValue = 0;
+
+    private bool loadingFinished = false;
 
     public override void _Ready()
     {
@@ -28,16 +32,43 @@ public partial class Loading : Node
         progressBar.Value = Mathf.MoveToward(
             (float)progressBar.Value,
             (float)targetValue,
-            (float)(100 * delta) // speed of fill
+            (float)(100 * delta)
+        // speed of fill
         );
 
         // GD.Print($"Progress: {progressBar.Value}/{progressBar.MaxValue}");
         //  GD.Print($"Target: {targetValue}");
 
-        if (progressBar.Value >= progressBar.MaxValue)
+        if (!loadingFinished && !IsQueuedForDeletion() && progressBar.Value >= progressBar.MaxValue)
         {
-            GetTree().ChangeSceneToFile("res://Scenes/Game/Main.tscn");
-            QueueFree();
+            loadingFinished = true;
+            OnLoadingComplete();
+        }
+    }
+
+    private async void OnLoadingComplete()
+    {
+        // Step 1: Notify completion
+        EmitSignal(SignalName.LoadingComplete);
+
+        // Step 2: Wait a frame for receivers to process
+        await ToSignal(GetTree(), "process_frame");
+
+        // Step 3: Clean up
+        CallDeferred(nameof(RemoveLoader));
+    }
+
+    private void RemoveLoader()
+    {
+        QueueFree();
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        if (progressBar is not null)
+        {
+            progressBar.Value = 0;
         }
     }
 }

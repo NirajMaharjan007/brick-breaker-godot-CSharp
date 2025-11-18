@@ -21,6 +21,8 @@ public partial class Pause : Control
     {
         base._Ready();
 
+        ProcessMode = ProcessModeEnum.Always;
+
         mainContainer = GetNode<VBoxContainer>("Main");
         label = mainContainer.GetNode<Label>("Label");
         boxContainer = mainContainer.GetNode<VBoxContainer>("ButtonContainer");
