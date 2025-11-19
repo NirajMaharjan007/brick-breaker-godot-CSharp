@@ -1,15 +1,15 @@
 using Godot;
+using MyGame.ScenesManager;
 
 namespace MyGame.Scripts;
 
 public partial class Menu : Control
 {
-    [Signal]
-    public delegate void StartGameEventHandler();
-
     private VBoxContainer container;
     private TextureButton startButton;
     private TextureButton exitButton;
+
+    private GodotObject sceneManager;
 
     public override void _Ready()
     {
@@ -31,7 +31,21 @@ public partial class Menu : Control
 
     private void OnStartButtonPressed()
     {
-        EmitSignal(SignalName.StartGame);
+        var sceneManager = SceneManager.Instance;
+        // SceneManager.Instance.ChangeSceneWithTransition(
+        //     "res://Scenes/Game/Main.tscn",
+        //     "fade",
+        //     1.0f
+        // );
+
+        if (sceneManager is null)
+            GD.PrintErr("SceneManager Instance is NULL");
+        else
+        {
+            GD.Print("SceneManager Instance FOUND!!!!");
+            sceneManager.ChangeSceneWithTransition("res://Scenes/Menu/Loading.tscn", "fade", 1.24f);
+        }
+
         /* var mainScene = GD.Load<PackedScene>("res://Scenes/Menu/Loading.tscn");
         if (mainScene == null)
         {

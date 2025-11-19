@@ -1,4 +1,5 @@
 using Godot;
+using MyGame.ScenesManager;
 
 namespace MyGame.Scripts;
 
@@ -60,6 +61,8 @@ public partial class Loading : Node
 
     private void RemoveLoader()
     {
+        var sceneManager = SceneManager.Instance;
+        sceneManager?.ChangeSceneWithTransition("res://Scenes/Game/Main.tscn", "fade", 1.0f);
         QueueFree();
     }
 

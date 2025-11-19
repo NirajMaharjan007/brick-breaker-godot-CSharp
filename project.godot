@@ -17,16 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SceneManager="*res://addons/scene_manager/scene_manager.tscn"
-Scenes="*res://addons/scene_manager/scenes.gd"
+SceneManager="*res://SceneManager/SceneManager.tscn"
 
 [dotnet]
 
 project/assembly_name="MyGame"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/scene_manager/plugin.cfg")
 
 [rendering]
 
