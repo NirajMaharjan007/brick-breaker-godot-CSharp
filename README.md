@@ -16,8 +16,8 @@ Break all the bricks, keep the ball alive, and aim for the highest score!
   - Multiple bricks ✅
   - Score tracking ✅
     - High Score varies (∵ Brick has Randomly Set)
-  - Live Decrease if out of bound ❌⌛
-    - TODO: FIXES
+  - Live Decrease if out of bound ✅⌛
+    - Shows GameOver
 
 ### Release Plan
 
@@ -28,8 +28,9 @@ Break all the bricks, keep the ball alive, and aim for the highest score!
    - Sound Effect
 
 2. Extra
-   - Power-ups
-   - High scores
+
+   - Power-ups ⌛
+   - High scores ✅
 
 ---
 
