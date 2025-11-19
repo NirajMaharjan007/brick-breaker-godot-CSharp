@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d36atbvoqr3l7"]
+
+[ext_resource type="Script" uid="uid://w85u0plt22e" path="res://SceneManager/Transition/SlideTransition.cs" id="1_g4fol"]
+
+[node name="SlideTransition" type="ColorRect"]
+script = ExtResource("1_g4fol")
