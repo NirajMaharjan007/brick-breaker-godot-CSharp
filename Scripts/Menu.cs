@@ -18,6 +18,8 @@ public partial class Menu : Control
         GetWindow().Mode = Window.ModeEnum.Windowed;
         GetWindow().SetFlag(Window.Flags.ResizeDisabled, true);
 
+        ProcessMode = ProcessModeEnum.Always;
+
         container = GetNode<VBoxContainer>("VBoxContainer");
 
         var buttonContainer = container.GetNode<VBoxContainer>("ButtonContainer");
