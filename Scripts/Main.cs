@@ -5,6 +5,56 @@ namespace MyGame.Scripts;
 
 public partial class Main : Node2D
 {
+    /**
+    
+    MAIN GAME LOGIC HERE
+
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡤⠖⠚⠉⠁⠀⠀⠉⠙⠒⢄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢀⠔⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⢢⡀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⡰⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣆⠀⠀
+⠀⠀⠀⠀⠀⢠⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢇⠀
+⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡄
+⠀⠀⠀⠀⢸⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠇
+⠀⠀⠀⠀⠸⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡘
+⠀⠀⠀⠀⠀⢻⠀⠀⠀⠀⠀⠀⠀⢃⣴⣶⡄⠀⠀⠀⠀⠀⢀⣶⡆⠀⢠⠇
+⠀⠀⠀⠀⠀⠀⣣⠀⠀⠀⠀⠀⠀⠀⠙⠛⠁⠀⠀⠀⠀⠀⠈⠛⠁⡰⠃⠀
+⠀⠀⠀⠀⢠⠞⠋⢳⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠜⠁⠀⠀
+⠀⠀⠀⣰⠋⠀⠀⠁⢷⠙⠲⢤⣀⣀⠀⠀⠀⠀⠴⠴⣆⠴⠚⠁⠀⠀⠀⠀
+⠀⠀⣰⠃⠀⠀⠀⠀⠘⡇⠀⣀⣀⡉⠙⠒⠒⠒⡎⠉⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⢠⠃⠀⠀⢶⠀⠀⠀⢳⠋⠁⠀⠙⢳⡠⠖⠚⠑⠲⡀⠀⠀⠀⠀⠀⠀⠀
+⠀⡎⠀⠀⠀⠘⣆⠀⠀⠈⢧⣀⣠⠔⡺⣧⠀⡴⡖⠦⠟⢣⠀⠀⠀⠀⠀⠀
+⢸⠀⠀⠀⠀⠀⢈⡷⣄⡀⠀⠀⠀⠀⠉⢹⣾⠁⠁⠀⣠⠎⠀⠀⠀⠀⠀⠀
+⠈⠀⠀⠀⠀⠀⡼⠆⠀⠉⢉⡝⠓⠦⠤⢾⠈⠓⠖⠚⢹⠀⠀⠀⠀⠀⠀⠀
+⢰⡀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠁⠀⠀⠀⢸⠀⠀⠀⠀⡏⠀⠀⠀⠀⠀⠀⠀
+⠀⠳⡀⠀⠀⠀⠀⠀⠀⣀⢾⠀⠀⠀⠀⣾⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠈⠐⠢⠤⠤⠔⠚⠁⠘⣆⠀⠀⢠⠋⢧⣀⣀⡼⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠈⠁⠀⠀⠀⠁⠀⠀⢀⡀⠠⠀⠀⠀⠀
+
+In the Brick-End, nothing really bounces the way you planned.
+
+You try your best, but in the Paddle-End, the ball still betrays you.
+
+In the Break-End, every brick acts like it pays rent.
+
+In the End-Brick moment, gravity shows who the real boss is.
+
+You line up the perfect shot, and in the End-Bounce, the ball says ‘nah’.
+
+In the Brick-End, your paddle cries quietly in the corner.
+
+Every level starts with hope, and in the End-Break, it ends with chaos.
+
+In the Bounce-End, the last brick always hides behind its friends.
+
+You swing left, swing right, but in the End-Paddle, the ball still escapes.
+
+In the Final-End-Brick, your aim suddenly forgets how aim works
+     
+    
+    
+    */
     private Paddle paddle;
 
     private Camera2D camera2D;
@@ -19,7 +69,8 @@ public partial class Main : Node2D
 
     private GameOver gameOver;
 
-    private AudioStreamPlayer2D gameOverSound;
+    private AudioStreamPlayer2D gameOverSound,
+        victorySound;
     private int totalScore = 0,
         lives = 3;
 
@@ -57,8 +108,9 @@ public partial class Main : Node2D
         pauseNode = GetNode<Node2D>("Node2D");
 
         gameOverNode = GetNode<Node2D>("GameOver");
-        gameOverSound = gameOverNode.GetNode<AudioStreamPlayer2D>("Voice");
         gameOver = gameOverNode.GetNode<GameOver>("GameOver");
+        gameOverSound = gameOverNode.GetNode<AudioStreamPlayer2D>("Voice");
+        victorySound = gameOverNode.GetNode<AudioStreamPlayer2D>("Victory");
 
         bricksContainer = GetNode<Node2D>("BricksContainer");
 
@@ -100,9 +152,9 @@ public partial class Main : Node2D
         GD.Print($"Brick area size: {areaSize}");
         GD.Print($"Rows: {row}, Cols: {col}");
 
-        for (int y = 0; y < row; y++)
+        for (int y = 0; y < 1; y++)
         {
-            for (int x = 0; x < col; x++)
+            for (int x = 0; x < 1; x++)
             {
                 var brick = brickScene.Instantiate<Brick>();
                 brick.BrickDestroyed += OnBrickDestroyed;
@@ -121,12 +173,34 @@ public partial class Main : Node2D
 
     public override void _Process(double delta)
     {
+        /**
+ *
+ *      ▄▄▄▄▄▄   ▄▄▄▄▄▄▄▄           ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄▄    ▄▄   ▄▄▄    ▄▄▄▄
+ *      ▀▀██▀▀   ▀▀▀██▀▀▀           ██      ██  ██▀▀██   ██▀▀▀▀██  ██  ██▀   ▄█▀▀▀▀█
+ *        ██        ██              ▀█▄ ██ ▄█▀ ██    ██  ██    ██  ██▄██     ██▄
+ *        ██        ██               ██ ██ ██  ██    ██  ███████   █████      ▀████▄
+ *        ██        ██               ███▀▀███  ██    ██  ██  ▀██▄  ██  ██▄        ▀██
+ *      ▄▄██▄▄      ██               ███  ███   ██▄▄██   ██    ██  ██   ██▄  █▄▄▄▄▄█▀
+ *      ▀▀▀▀▀▀      ▀▀               ▀▀▀  ▀▀▀    ▀▀▀▀    ▀▀    ▀▀▀ ▀▀    ▀▀   ▀▀▀▀▀
+ *
+ *
+ */
+
         base._Process(delta);
 
-        // GD.Print($"Flag: {ball.IsOutside}, WasOutside: {wasOutside}, Lives: {lives}");
-        if (bricksContainer.GetChildCount() <= 1)
+        // GD.Print($"Bricks left: {bricksContainer.GetChildCount()}");
+        if (bricksContainer.GetChildCount() <= 1 && !gameOverTriggered)
         {
             GD.Print("Level Complete!");
+            gameOverTriggered = true;
+            isGameOver = true;
+            gameOver.Win = true;
+
+            victorySound.ProcessMode = ProcessModeEnum.Always;
+            victorySound.Play();
+            victorySound.Finished += victorySound.QueueFree;
+
+            CallDeferred(nameof(FinishGameOver));
         }
 
         if (ball.IsOutside && !wasOutside && lives > 0)
@@ -140,6 +214,7 @@ public partial class Main : Node2D
         isGameOver = lives <= 0;
         if (isGameOver && !gameOverTriggered)
         {
+            gameOver.Win = false;
             gameOverTriggered = true; // prevents spam
 
             gameOverSound.ProcessMode = ProcessModeEnum.Always;
@@ -152,7 +227,8 @@ public partial class Main : Node2D
         if (GetTree().Paused || isGameOver)
         {
             paddle.MoveIt = false;
-            pauseNode.Visible = !isGameOver;
+            pauseNode.Visible = !isGameOver && !gameOver.Win;
+            GD.Print($"Game Paused: pauseNode.Visible = {pauseNode.Visible}");
         }
         else
         {
