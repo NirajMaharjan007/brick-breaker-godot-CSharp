@@ -152,9 +152,9 @@ In the Final-End-Brick, your aim suddenly forgets how aim works
         GD.Print($"Brick area size: {areaSize}");
         GD.Print($"Rows: {row}, Cols: {col}");
 
-        for (int y = 0; y < 1; y++)
+        for (int y = 0; y < row; y++)
         {
-            for (int x = 0; x < 1; x++)
+            for (int x = 0; x < col; x++)
             {
                 var brick = brickScene.Instantiate<Brick>();
                 brick.BrickDestroyed += OnBrickDestroyed;
